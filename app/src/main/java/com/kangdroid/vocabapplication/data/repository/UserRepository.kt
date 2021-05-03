@@ -17,7 +17,7 @@ class UserRepository @Inject constructor(
         Log.d(logTag, "Initiating UserRepository!")
     }
 
-    fun getAllUsers(): List<User> {
+    suspend fun getAllUsers(): List<User> {
         Log.d(logTag, "Accessing whole user information..")
         return userDao.getAllUser()
     }

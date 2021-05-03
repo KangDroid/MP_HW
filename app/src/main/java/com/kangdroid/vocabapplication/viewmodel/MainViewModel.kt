@@ -18,14 +18,7 @@ class MainViewModel @Inject constructor(
 
     fun requestDBCheck() {
         viewModelScope.launch {
-            lateinit var userList: List<User>
-            with(Dispatchers.IO) {
-                userList = userRepository.getAllUsers()
-            }
-
-            with(Dispatchers.Main) {
-                databaseEmptyLiveData.value = userList.isEmpty()
-            }
+            databaseEmptyLiveData.value =  userRepository.getAllUsers().isEmpty()
         }
     }
 }

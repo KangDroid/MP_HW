@@ -8,5 +8,5 @@ import javax.inject.Singleton
 @Dao
 interface UserDao {
     @Query("SELECT * FROM user")
-    fun getAllUser(): List<User>
+    suspend fun getAllUser(): List<User>
 }

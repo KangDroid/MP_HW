@@ -4,6 +4,7 @@ import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import com.kangdroid.vocabapplication.data.entity.user.User
 import com.kangdroid.vocabapplication.data.entity.user.UserDatabase
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -29,7 +30,9 @@ class UserRepositoryTest {
 
     @Test
     fun is_getAllUsers_returns_empty_list() {
-        val list: List<User> = userRepository.getAllUsers()
+        val list: List<User> = runBlocking {
+            userRepository.getAllUsers()
+        }
         assertThat(list.size).isEqualTo(0)
     }
 }

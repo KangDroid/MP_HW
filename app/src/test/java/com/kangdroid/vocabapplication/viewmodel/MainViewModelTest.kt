@@ -3,16 +3,37 @@ package com.kangdroid.vocabapplication.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import com.kangdroid.vocabapplication.data.entity.user.User
+import com.kangdroid.vocabapplication.data.entity.user.UserDao
+import com.kangdroid.vocabapplication.data.repository.UserRepository
+import kotlinx.coroutines.runBlocking
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 
+class FakeRepository: UserDao {
+    override suspend fun getAllUser(): List<User> {
+        return listOf()
+    }
+}
+
 class MainViewModelTest {
     // Rule that every android-thread should launched in single thread
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
+
+    private val userRepository: UserRepository by lazy {
+        UserRepository(FakeRepository())
+    }
+
+    // View Model
+    private val mainViewModel: MainViewModel by lazy {
+        MainViewModel(userRepository)
+    }
 
     /* Copyright 2019 Google LLC.
    SPDX-License-Identifier: Apache-2.0 */
@@ -43,5 +64,10 @@ class MainViewModelTest {
 
     @Test
     fun is_requestDBCheck_returns_false() {
+        runBlocking {
+            mainViewModel.requestDBCheck()
+        }
+
+        assertThat(mainViewModel.databaseEmptyLiveData.getOrAwaitValue()).isEqualTo(true)
     }
 }

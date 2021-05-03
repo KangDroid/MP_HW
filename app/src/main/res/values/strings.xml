@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">VocabApplication</string>
+    <string name="app_name">Wordable</string>
+
+    <!-- Main Login Activity -->
+    <string name="app_details">Word-Able, Yes we can memorize word easily!</string>
+    <string name="hint_username">Input UserName</string>
+    <string name="hint_password">Input Password</string>
+    <string name="hint_user_top">Username</string>
+    <string name="hint_password_top">Password</string>
+    <string name="button_login">Login</string>
+    <string name="button_join">Not an user? Join us!</string>
 </resources>

@@ -67,6 +67,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
 
+    // For ROOM Support
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+
+    // KAPT[Kotlin Processor]
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+    kaptTest "android.arch.persistence.room:testing:1.1.1"
+
     // Test Related
     testImplementation 'com.squareup.okhttp3:mockwebserver:4.3.1'
     testImplementation "androidx.arch.core:core-testing:2.1.0"

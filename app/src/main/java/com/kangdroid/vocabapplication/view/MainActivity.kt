@@ -1,4 +1,4 @@
-package com.kangdroid.vocabapplication
+package com.kangdroid.vocabapplication.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

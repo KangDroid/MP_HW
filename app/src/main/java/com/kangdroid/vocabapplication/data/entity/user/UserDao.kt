@@ -1,6 +1,7 @@
 package com.kangdroid.vocabapplication.data.entity.user
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import javax.inject.Singleton
 
@@ -9,4 +10,7 @@ import javax.inject.Singleton
 interface UserDao {
     @Query("SELECT * FROM user")
     suspend fun getAllUser(): List<User>
+
+    @Insert
+    suspend fun addUser(user: User)
 }

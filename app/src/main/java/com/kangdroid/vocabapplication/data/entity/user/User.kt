@@ -10,4 +10,7 @@ class User(
     @ColumnInfo(name = "username") var userName: String,
     @ColumnInfo(name = "password") var userPassword: String
 ) {
+    override fun toString(): String {
+        return "User Name: $userName"
+    }
 }

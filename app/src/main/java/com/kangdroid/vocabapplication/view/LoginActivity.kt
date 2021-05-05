@@ -1,5 +1,6 @@
 package com.kangdroid.vocabapplication.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
@@ -49,6 +50,9 @@ class LoginActivity : AppCompatActivity() {
             when (it) {
                 ResponseCode.REQUIRED_LOGIN -> commitFragment(loginFragment, false)
                 ResponseCode.REQUIRED_REGISTER ->commitFragment(registerFragment, false)
+                ResponseCode.REQUIRED_HOME -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                }
                 else -> {
                     Log.e(this::class.java.simpleName, "Unknown code observed on registerNeeded. Value: $it")
                 }

@@ -8,20 +8,26 @@ import com.kangdroid.vocabapplication.data.entity.user.User
 import com.kangdroid.vocabapplication.data.repository.UserRepository
 import com.kangdroid.vocabapplication.data.response.ResponseCode
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val userRepository: UserRepository
-): ViewModel() {
+) : ViewModel() {
+    // Log Tag
+    private val logTag: String = this::class.java.simpleName
+
+    // Database empty or NOT checker!
     var databaseEmptyLiveData: MutableLiveData<Boolean> = MutableLiveData()
+
+    // Response of registering users
     var registerResponseLiveData: MutableLiveData<ResponseCode> = MutableLiveData()
 
+    // Check whether DB is empty or not
     fun requestDBCheck() {
         viewModelScope.launch {
-            databaseEmptyLiveData.value =  userRepository.getAllUsers().isEmpty()
+            databaseEmptyLiveData.value = userRepository.getAllUsers().isEmpty()
         }
     }
 
@@ -31,19 +37,13 @@ class LoginViewModel @Inject constructor(
             runCatching {
                 userRepository.findUserByName(userName)
             }.onSuccess {
-                Log.w(this::class.java.simpleName, "Duplicated name exists!")
+                Log.w(logTag, "Duplicated name exists!")
                 registerResponseLiveData.value = ResponseCode.REGISTER_DUPLICATED_ID
             }.onFailure {
-                Log.d(this::class.java.simpleName, "No duplicate username found.")
+                Log.d(logTag, "No duplicate username found.")
 
                 // Add User
-                userRepository.addUser(
-                    User(
-                        id = null,
-                        userName = userName,
-                        userPassword = userPassword
-                    )
-                )
+                userRepository.addUser(User(null, userName, userPassword))
 
                 // Register Completed!
                 registerResponseLiveData.value = ResponseCode.REGISTER_OK

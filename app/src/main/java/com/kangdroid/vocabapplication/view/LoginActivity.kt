@@ -35,6 +35,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(activityMainBinding.root)
         // Set Observer
+        setObservers()
+
+        // Call View model to update data
+        loginViewModel.requestDBCheck()
+    }
+
+    // Set Live Data observer for login view model
+    private fun setObservers() {
         loginViewModel.databaseEmptyLiveData.observe(this) {
             Log.d(this::class.java.simpleName, "Observed DatabaseEmptyLiveData, value: $it")
             if (!it) {
@@ -45,9 +53,6 @@ class LoginActivity : AppCompatActivity() {
                 commitFragment(registerFragment, false)
             }
         }
-
-        // Call View model to update data
-        loginViewModel.requestDBCheck()
     }
 
     private fun commitFragment(targetFragment: Fragment, replace: Boolean) {

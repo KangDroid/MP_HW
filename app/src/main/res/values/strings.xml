@@ -14,4 +14,8 @@
     <string name="button_register">Register!</string>
     <string name="hint_password_check_top">Confirm Password</string>
     <string name="hint_password_check">Enter password again</string>
+    <string name="required_field">This field is required!</string>
+    <string name="password_length_short">Password length should be more than 8.</string>
+    <string name="password_no_special">Password should contains special characters, without whitespace!</string>
+    <string name="password_does_not_match">Password does not match!</string>
 </resources>

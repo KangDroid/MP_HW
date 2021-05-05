@@ -86,4 +86,86 @@ class LoginViewModelTest {
 
         assertThat(loginViewModel.registerResponseLiveData.getOrAwaitValue()).isEqualTo(ResponseCode.REGISTER_OK)
     }
+
+    @Test
+    fun is_loginUser_works_well() {
+        class LoginFakeRepository: UserDao {
+            override suspend fun getAllUser(): List<User> = listOf()
+
+            override suspend fun addUser(user: User) = Unit
+
+            override suspend fun findUserByUserName(userName: String): User = User(
+                null, "kangdroid", "testtest!"
+            )
+
+        }
+        val loginUserRepository: UserRepository by lazy {
+            UserRepository(LoginFakeRepository())
+        }
+
+        // View Model
+        val loginViewModel: LoginViewModel by lazy {
+            LoginViewModel(loginUserRepository)
+        }
+
+        runBlocking {
+            loginViewModel.loginUser("kangdroid", "testtest!")
+        }
+
+        assertThat(loginViewModel.loginSucceed.getOrAwaitValue()).isEqualTo(ResponseCode.LOGIN_OK)
+    }
+
+    @Test
+    fun is_loginUser_wrong_when_user_not_found() {
+        class LoginFakeRepository: UserDao {
+            override suspend fun getAllUser(): List<User> = listOf()
+
+            override suspend fun addUser(user: User) = Unit
+
+            override suspend fun findUserByUserName(userName: String): User? = null
+
+        }
+        val loginUserRepository: UserRepository by lazy {
+            UserRepository(LoginFakeRepository())
+        }
+
+        // View Model
+        val loginViewModel: LoginViewModel by lazy {
+            LoginViewModel(loginUserRepository)
+        }
+
+        runBlocking {
+            loginViewModel.loginUser("kangdroid", "testtest!")
+        }
+
+        assertThat(loginViewModel.loginSucceed.getOrAwaitValue()).isEqualTo(ResponseCode.LOGIN_USERNAME_NOT_FOUND)
+    }
+
+    @Test
+    fun is_loginUser_wrong_pw_not_correct() {
+        class LoginFakeRepository: UserDao {
+            override suspend fun getAllUser(): List<User> = listOf()
+
+            override suspend fun addUser(user: User) = Unit
+
+            override suspend fun findUserByUserName(userName: String): User = User(
+                null, "kangdroid", "asdf!"
+            )
+
+        }
+        val loginUserRepository: UserRepository by lazy {
+            UserRepository(LoginFakeRepository())
+        }
+
+        // View Model
+        val loginViewModel: LoginViewModel by lazy {
+            LoginViewModel(loginUserRepository)
+        }
+
+        runBlocking {
+            loginViewModel.loginUser("kangdroid", "testtest!")
+        }
+
+        assertThat(loginViewModel.loginSucceed.getOrAwaitValue()).isEqualTo(ResponseCode.LOGIN_PASSWORD_INCORRECT)
+    }
 }

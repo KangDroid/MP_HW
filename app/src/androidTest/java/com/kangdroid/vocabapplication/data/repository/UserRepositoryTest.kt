@@ -59,4 +59,39 @@ class UserRepositoryTest {
             }
         }
     }
+
+    @Test
+    fun is_findUserByName_throws_IllegalStateException_no_user() {
+        runBlocking {
+            runCatching {
+                userRepository.findUserByName("non-name")
+            }.onSuccess {
+                fail("This should be failed because db is empty.")
+            }.onFailure {
+                assertThat(it is IllegalStateException).isEqualTo(true)
+                assertThat(it.message).isEqualTo("Cannot find username with non-name!")
+            }
+        }
+    }
+
+    @Test
+    fun is_findUserByName_works_well() {
+        val mockUser: User = User(
+            id = null,
+            userName = "KangDroid",
+            userPassword = "test"
+        )
+        runBlocking {
+            userRepository.addUser(mockUser)
+            runCatching {
+                userRepository.findUserByName(mockUser.userName)
+            }.onFailure {
+                println(it.stackTraceToString())
+                fail("We saved mock value but cannot find?")
+            }.onSuccess {
+                assertThat(it.userName).isEqualTo(it.userName)
+                assertThat(it.userPassword).isEqualTo(it.userPassword)
+            }
+        }
+    }
 }

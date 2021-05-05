@@ -13,4 +13,7 @@ interface UserDao {
 
     @Insert
     suspend fun addUser(user: User)
+
+    @Query("SELECT * FROM user WHERE username IS :userName")
+    suspend fun findUserByUserName(userName: String): User?
 }

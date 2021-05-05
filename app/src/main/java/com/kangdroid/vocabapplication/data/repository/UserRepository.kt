@@ -26,4 +26,10 @@ class UserRepository @Inject constructor(
         Log.d(logTag, "Adding Users: $user")
         return userDao.addUser(user)
     }
+
+    suspend fun findUserByName(userName: String): User {
+        Log.d(logTag, "Finding user with username: $userName")
+        return userDao.findUserByUserName(userName)
+            ?: throw IllegalStateException("Cannot find username with $userName!")
+    }
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import com.kangdroid.vocabapplication.data.entity.user.User
 import com.kangdroid.vocabapplication.data.entity.user.UserDao
 import com.kangdroid.vocabapplication.data.repository.UserRepository
+import com.kangdroid.vocabapplication.data.response.ResponseCode
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
@@ -17,6 +18,13 @@ import java.util.concurrent.TimeoutException
 class FakeRepository: UserDao {
     override suspend fun getAllUser(): List<User> {
         return listOf()
+    }
+
+    override suspend fun addUser(user: User) {
+    }
+
+    override suspend fun findUserByUserName(userName: String): User? {
+        return null
     }
 }
 
@@ -68,5 +76,14 @@ class LoginViewModelTest {
         }
 
         assertThat(loginViewModel.databaseEmptyLiveData.getOrAwaitValue()).isEqualTo(true)
+    }
+
+    @Test
+    fun is_registerUser_returns_REGISTER_OK() {
+        runBlocking {
+            loginViewModel.registerUser("KangDroid", "whatever")
+        }
+
+        assertThat(loginViewModel.registerResponseLiveData.getOrAwaitValue()).isEqualTo(ResponseCode.REGISTER_OK)
     }
 }

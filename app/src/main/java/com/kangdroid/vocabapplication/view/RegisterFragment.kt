@@ -66,7 +66,7 @@ class RegisterFragment @Inject constructor(): Fragment() {
                     fragmentRegisterBinding.registerInputName.error = getString(R.string.register_duplicated_id, fragmentRegisterBinding.registerInputName.editText?.text)
                 }
                 ResponseCode.REGISTER_OK -> {
-                    // TODO: Notify loginViewModel to switch to login page
+                    Toast.makeText(context, R.string.register_complete, Toast.LENGTH_SHORT).show()
                     loginViewModel.setRegisterCompleted()
                 }
                 else -> {

@@ -20,4 +20,5 @@
     <string name="password_does_not_match">Password does not match!</string>
     <string name="register_duplicated_id"> Username %s already exists!</string>
     <string name="unknown_error">Unknown Error Occurred. Contact developer for more details.</string>
+    <string name="register_complete">Register Completed!</string>
 </resources>

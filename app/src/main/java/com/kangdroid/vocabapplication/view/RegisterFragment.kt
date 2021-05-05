@@ -44,36 +44,48 @@ class RegisterFragment @Inject constructor(): Fragment() {
         // User name Check
         fragmentRegisterBinding.registerInputName.editText?.addTextChangedListener {
             it?.let {
-                if (it.trim().isEmpty()) {
-                    fragmentRegisterBinding.registerInputName.error = getString(R.string.required_field)
-                }
+                checkUserName(it.trim().toString())
             }
         }
 
         // Password validation
         fragmentRegisterBinding.registerPasswordLayout.editText?.addTextChangedListener {
             it?.let {
-                when {
-                    (it.trim().length < 8) -> fragmentRegisterBinding.registerPasswordLayout.error = getString(R.string.password_length_short)
-                    !passwordRegex.matches(it.trim()) -> fragmentRegisterBinding.registerPasswordLayout.error = getString(R.string.password_no_special)
-                    else -> fragmentRegisterBinding.registerPasswordLayout.error = null
-                }
+                checkPassword(it.trim().toString())
             }
         }
 
         // Password Check
         fragmentRegisterBinding.registerPasswordCheck.editText?.addTextChangedListener {
             it?.let {
-                val inputText: String = it.trim().toString()
-                val targetText: String = fragmentRegisterBinding.registerPasswordLayout.editText?.text?.trim().toString()
-
-                when {
-                    inputText != targetText -> {
-                        fragmentRegisterBinding.registerPasswordCheck.error = getString(R.string.password_does_not_match)
-                    }
-                    else -> fragmentRegisterBinding.registerPasswordCheck.error = null
-                }
+                checkPasswordValidation(it.trim().toString())
             }
+        }
+    }
+
+    private fun checkUserName(userName: String) {
+        if (userName.isEmpty()) {
+            fragmentRegisterBinding.registerInputName.error = getString(R.string.required_field)
+        }
+    }
+
+    private fun checkPassword(userPassword: String) {
+        when {
+            (userPassword.length < 8) -> fragmentRegisterBinding.registerPasswordLayout.error = getString(R.string.password_length_short)
+            !passwordRegex.matches(userPassword) -> fragmentRegisterBinding.registerPasswordLayout.error = getString(R.string.password_no_special)
+            else -> fragmentRegisterBinding.registerPasswordLayout.error = null
+        }
+    }
+
+    private fun checkPasswordValidation(userPassword: String) {
+        val inputText: String = userPassword.toString()
+        val targetText: String = fragmentRegisterBinding.registerPasswordLayout.editText?.text?.trim().toString()
+
+        when {
+            inputText != targetText -> {
+                fragmentRegisterBinding.registerPasswordCheck.error = getString(R.string.password_does_not_match)
+            }
+            else -> fragmentRegisterBinding.registerPasswordCheck.error = null
         }
     }
 }

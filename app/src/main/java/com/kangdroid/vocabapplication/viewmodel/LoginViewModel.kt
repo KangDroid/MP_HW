@@ -82,6 +82,7 @@ class LoginViewModel @Inject constructor(
             loginSucceed.value = ResponseCode.LOGIN_PASSWORD_INCORRECT
         } else {
             loginSucceed.value = ResponseCode.LOGIN_OK
+            Log.d(logTag, "Login Succeed!")
         }
     }
 

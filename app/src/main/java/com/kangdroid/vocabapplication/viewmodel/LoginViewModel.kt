@@ -54,4 +54,8 @@ class LoginViewModel @Inject constructor(
     fun setRegisterCompleted() {
         registerNeeded.value = false
     }
+
+    fun setRegisterNeeded() {
+        registerNeeded.value = true
+    }
 }

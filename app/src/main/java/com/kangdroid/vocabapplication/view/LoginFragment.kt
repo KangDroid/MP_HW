@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.kangdroid.vocabapplication.R
 import com.kangdroid.vocabapplication.databinding.FragmentLoginBinding
+import com.kangdroid.vocabapplication.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -16,6 +18,9 @@ class LoginFragment @Inject constructor(): Fragment() {
     // View Binding
     private var _fragmentLoginBinding: FragmentLoginBinding? = null
     private val fragmentLoginBinding: FragmentLoginBinding get() = _fragmentLoginBinding!!
+
+    // Login View Model
+    private val loginViewModel: LoginViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +36,9 @@ class LoginFragment @Inject constructor(): Fragment() {
 
         // Init Text Layout
         initTextLayout()
+
+        // Init buttons
+        initButtons()
     }
 
     override fun onDestroyView() {
@@ -45,6 +53,12 @@ class LoginFragment @Inject constructor(): Fragment() {
             it?.let {
                 checkUserName(it.toString())
             }
+        }
+    }
+
+    private fun initButtons() {
+        fragmentLoginBinding.joinButton.setOnClickListener {
+            loginViewModel.setRegisterNeeded()
         }
     }
 

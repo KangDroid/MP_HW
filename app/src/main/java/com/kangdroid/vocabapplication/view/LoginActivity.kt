@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
 
     // Set Live Data observer for login view model
     private fun setObservers() {
-        loginViewModel.databaseEmptyLiveData.observe(this) {
+        loginViewModel.registerNeeded.observe(this) {
             Log.d(this::class.java.simpleName, "Observed DatabaseEmptyLiveData, value: $it")
             if (!it) {
                 // We have users. show Login page

@@ -19,7 +19,7 @@ class LoginViewModel @Inject constructor(
     private val logTag: String = this::class.java.simpleName
 
     // Database empty or NOT checker!
-    var databaseEmptyLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    var registerNeeded: MutableLiveData<Boolean> = MutableLiveData()
 
     // Response of registering users
     var registerResponseLiveData: MutableLiveData<ResponseCode> = MutableLiveData()
@@ -27,7 +27,7 @@ class LoginViewModel @Inject constructor(
     // Check whether DB is empty or not
     fun requestDBCheck() {
         viewModelScope.launch {
-            databaseEmptyLiveData.value = userRepository.getAllUsers().isEmpty()
+            registerNeeded.value = userRepository.getAllUsers().isEmpty()
         }
     }
 
@@ -49,5 +49,9 @@ class LoginViewModel @Inject constructor(
                 registerResponseLiveData.value = ResponseCode.REGISTER_OK
             }
         }
+    }
+
+    fun setRegisterCompleted() {
+        registerNeeded.value = false
     }
 }

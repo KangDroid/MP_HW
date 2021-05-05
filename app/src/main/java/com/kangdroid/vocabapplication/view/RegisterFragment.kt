@@ -67,6 +67,7 @@ class RegisterFragment @Inject constructor(): Fragment() {
                 }
                 ResponseCode.REGISTER_OK -> {
                     // TODO: Notify loginViewModel to switch to login page
+                    loginViewModel.setRegisterCompleted()
                 }
                 else -> {
                     Toast.makeText(context, getText(R.string.unknown_error), Toast.LENGTH_LONG)

@@ -75,7 +75,7 @@ class LoginViewModelTest {
             loginViewModel.requestDBCheck()
         }
 
-        assertThat(loginViewModel.databaseEmptyLiveData.getOrAwaitValue()).isEqualTo(true)
+        assertThat(loginViewModel.registerNeeded.getOrAwaitValue()).isEqualTo(true)
     }
 
     @Test

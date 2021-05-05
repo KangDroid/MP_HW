@@ -16,10 +16,9 @@ import dagger.hilt.components.SingletonComponent
 object DataModule {
     @Provides
     fun provideUserDatabase(@ApplicationContext context: Context): UserDatabase {
-        return Room.databaseBuilder(
+        return Room.inMemoryDatabaseBuilder(
             context,
-            UserDatabase::class.java,
-            "user.db"
+            UserDatabase::class.java
         ).build()
     }
 

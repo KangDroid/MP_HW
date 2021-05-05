@@ -8,6 +8,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.kangdroid.vocabapplication.R
+import com.kangdroid.vocabapplication.data.response.ResponseCode
 import com.kangdroid.vocabapplication.databinding.FragmentLoginBinding
 import com.kangdroid.vocabapplication.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +40,9 @@ class LoginFragment @Inject constructor(): Fragment() {
 
         // Init buttons
         initButtons()
+
+        // Init Observers
+        initObserver()
     }
 
     override fun onDestroyView() {
@@ -59,6 +63,29 @@ class LoginFragment @Inject constructor(): Fragment() {
     private fun initButtons() {
         fragmentLoginBinding.joinButton.setOnClickListener {
             loginViewModel.setRegisterNeeded()
+        }
+
+        fragmentLoginBinding.loginButton.setOnClickListener {
+            val userName: String = fragmentLoginBinding.userNameInputLayout.editText?.text.toString()
+            val userPassword: String = fragmentLoginBinding.passwordInputLayout.editText?.text.toString()
+            loginViewModel.loginUser(userName, userPassword)
+        }
+    }
+
+    private fun initObserver() {
+        loginViewModel.loginSucceed.observe(viewLifecycleOwner) {
+            when(it) {
+                ResponseCode.LOGIN_PASSWORD_INCORRECT, ResponseCode.LOGIN_USERNAME_NOT_FOUND -> {
+                    fragmentLoginBinding.userNameInputLayout.apply {
+                        editText?.text = null
+                        error = getString(R.string.id_password_mismatch)
+                    }
+                    fragmentLoginBinding.passwordInputLayout.apply {
+                        editText?.text = null
+                        error = getString(R.string.id_password_mismatch)
+                    }
+                }
+            }
         }
     }
 

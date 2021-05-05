@@ -21,4 +21,5 @@
     <string name="register_duplicated_id"> Username %s already exists!</string>
     <string name="unknown_error">Unknown Error Occurred. Contact developer for more details.</string>
     <string name="register_complete">Register Completed!</string>
+    <string name="id_password_mismatch">Username or Password is incorrect!</string>
 </resources>

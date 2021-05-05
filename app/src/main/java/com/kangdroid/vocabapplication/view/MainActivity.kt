@@ -24,6 +24,10 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var loginFragment: LoginFragment
 
+    // Register Fragment
+    @Inject
+    lateinit var registerFragment: RegisterFragment
+
     // Main View Model
     private val mainViewModel: MainViewModel by viewModels()
 
@@ -38,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                 commitFragment(loginFragment, false)
             } else {
                 // We do not have users. show register page
-                // TODO: Show Register Page
+                commitFragment(registerFragment, false)
             }
         }
 

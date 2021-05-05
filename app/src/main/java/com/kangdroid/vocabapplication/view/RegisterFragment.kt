@@ -5,10 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.kangdroid.vocabapplication.R
+import com.kangdroid.vocabapplication.data.response.ResponseCode
 import com.kangdroid.vocabapplication.databinding.FragmentRegisterBinding
 import com.kangdroid.vocabapplication.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,12 +47,32 @@ class RegisterFragment @Inject constructor(): Fragment() {
 
         // Init Register Button
         initRegisterButton()
+
+        // Observer Init
+        registerObserverViewModel()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         // Make sure de-reference value since Memory leak might occurs.
         _registerFragmentBinding = null
+    }
+
+    private fun registerObserverViewModel() {
+        loginViewModel.registerResponseLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                ResponseCode.REGISTER_DUPLICATED_ID -> {
+                    fragmentRegisterBinding.registerInputName.error = getString(R.string.register_duplicated_id, fragmentRegisterBinding.registerInputName.editText?.text)
+                }
+                ResponseCode.REGISTER_OK -> {
+                    // TODO: Notify loginViewModel to switch to login page
+                }
+                else -> {
+                    Toast.makeText(context, getText(R.string.unknown_error), Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+        }
     }
 
     private fun initRegisterButton() {

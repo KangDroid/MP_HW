@@ -18,4 +18,6 @@
     <string name="password_length_short">Password length should be more than 8.</string>
     <string name="password_no_special">Password should contains special characters, without whitespace!</string>
     <string name="password_does_not_match">Password does not match!</string>
+    <string name="register_duplicated_id"> Username %s already exists!</string>
+    <string name="unknown_error">Unknown Error Occurred. Contact developer for more details.</string>
 </resources>

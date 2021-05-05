@@ -7,13 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.kangdroid.vocabapplication.R
 import com.kangdroid.vocabapplication.databinding.ActivityMainBinding
-import com.kangdroid.vocabapplication.viewmodel.MainViewModel
+import com.kangdroid.vocabapplication.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 // The View
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     // Activity Main Binding by lazy
     private val activityMainBinding: ActivityMainBinding by lazy {
@@ -29,13 +29,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var registerFragment: RegisterFragment
 
     // Main View Model
-    private val mainViewModel: MainViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activityMainBinding.root)
         // Set Observer
-        mainViewModel.databaseEmptyLiveData.observe(this) {
+        loginViewModel.databaseEmptyLiveData.observe(this) {
             Log.d(this::class.java.simpleName, "Observed DatabaseEmptyLiveData, value: $it")
             if (!it) {
                 // We have users. show Login page
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Call View model to update data
-        mainViewModel.requestDBCheck()
+        loginViewModel.requestDBCheck()
     }
 
     private fun commitFragment(targetFragment: Fragment, replace: Boolean) {

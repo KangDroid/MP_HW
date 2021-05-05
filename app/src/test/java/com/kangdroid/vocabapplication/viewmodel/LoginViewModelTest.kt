@@ -8,7 +8,6 @@ import com.kangdroid.vocabapplication.data.entity.user.UserDao
 import com.kangdroid.vocabapplication.data.repository.UserRepository
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import java.util.concurrent.CountDownLatch
@@ -21,7 +20,7 @@ class FakeRepository: UserDao {
     }
 }
 
-class MainViewModelTest {
+class LoginViewModelTest {
     // Rule that every android-thread should launched in single thread
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -31,8 +30,8 @@ class MainViewModelTest {
     }
 
     // View Model
-    private val mainViewModel: MainViewModel by lazy {
-        MainViewModel(userRepository)
+    private val loginViewModel: LoginViewModel by lazy {
+        LoginViewModel(userRepository)
     }
 
     /* Copyright 2019 Google LLC.
@@ -65,9 +64,9 @@ class MainViewModelTest {
     @Test
     fun is_requestDBCheck_returns_false() {
         runBlocking {
-            mainViewModel.requestDBCheck()
+            loginViewModel.requestDBCheck()
         }
 
-        assertThat(mainViewModel.databaseEmptyLiveData.getOrAwaitValue()).isEqualTo(true)
+        assertThat(loginViewModel.databaseEmptyLiveData.getOrAwaitValue()).isEqualTo(true)
     }
 }

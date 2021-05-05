@@ -9,4 +9,9 @@
     <string name="hint_password_top">Password</string>
     <string name="button_login">Login</string>
     <string name="button_join">Not an user? Join us!</string>
+
+    <!-- Main Register View -->
+    <string name="button_register">Register!</string>
+    <string name="hint_password_check_top">Confirm Password</string>
+    <string name="hint_password_check">Enter password again</string>
 </resources>

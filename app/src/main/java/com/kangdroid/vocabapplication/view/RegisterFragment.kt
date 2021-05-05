@@ -57,6 +57,11 @@ class RegisterFragment @Inject constructor(): Fragment() {
         super.onDestroyView()
         // Make sure de-reference value since Memory leak might occurs.
         _registerFragmentBinding = null
+
+        // Make sure we set every boolean to false since views[Edit] are destroyed
+        readyUserName = false
+        readyUserPassword = false
+        readyUserPasswordValidation = false
     }
 
     private fun registerObserverViewModel() {

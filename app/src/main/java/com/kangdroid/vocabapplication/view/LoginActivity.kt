@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.kangdroid.vocabapplication.R
+import com.kangdroid.vocabapplication.data.response.ResponseCode
 import com.kangdroid.vocabapplication.databinding.ActivityMainBinding
 import com.kangdroid.vocabapplication.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,12 +46,12 @@ class LoginActivity : AppCompatActivity() {
     private fun setObservers() {
         loginViewModel.registerNeeded.observe(this) {
             Log.d(this::class.java.simpleName, "Observed DatabaseEmptyLiveData, value: $it")
-            if (!it) {
-                // We have users. show Login page
-                commitFragment(loginFragment, false)
-            } else {
-                // We do not have users. show register page
-                commitFragment(registerFragment, false)
+            when (it) {
+                ResponseCode.REQUIRED_LOGIN -> commitFragment(loginFragment, false)
+                ResponseCode.REQUIRED_REGISTER ->commitFragment(registerFragment, false)
+                else -> {
+                    Log.e(this::class.java.simpleName, "Unknown code observed on registerNeeded. Value: $it")
+                }
             }
         }
     }

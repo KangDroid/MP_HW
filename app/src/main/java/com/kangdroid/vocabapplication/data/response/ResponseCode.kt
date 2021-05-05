@@ -1,10 +1,13 @@
 package com.kangdroid.vocabapplication.data.response
 
-enum class ResponseCode(private val errorMessage: String) {
-    REGISTER_OK("Register Completed!"),
-    REGISTER_DUPLICATED_ID("Username already exists!"),
-    REGISTER_UNKNOWN_FAILURE("Unknown Error Occurred."),
-    LOGIN_USERNAME_NOT_FOUND("Username Not Found!"),
-    LOGIN_PASSWORD_INCORRECT("Password Incorrect!"),
-    LOGIN_OK("Login OK!")
+enum class ResponseCode() {
+    REQUIRED_LOGIN,
+    REQUIRED_REGISTER,
+    REQUIRED_NOTHING,
+    REGISTER_OK,
+    REGISTER_DUPLICATED_ID,
+    REGISTER_UNKNOWN_FAILURE,
+    LOGIN_USERNAME_NOT_FOUND,
+    LOGIN_PASSWORD_INCORRECT,
+    LOGIN_OK
 }

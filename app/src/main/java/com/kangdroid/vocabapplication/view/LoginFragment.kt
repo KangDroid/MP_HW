@@ -62,7 +62,7 @@ class LoginFragment @Inject constructor(): Fragment() {
 
     private fun initButtons() {
         fragmentLoginBinding.joinButton.setOnClickListener {
-            loginViewModel.setRegisterNeeded()
+            loginViewModel.requestRegisterPage()
         }
 
         fragmentLoginBinding.loginButton.setOnClickListener {

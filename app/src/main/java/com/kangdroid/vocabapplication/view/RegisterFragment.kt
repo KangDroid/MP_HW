@@ -72,7 +72,7 @@ class RegisterFragment @Inject constructor(): Fragment() {
                 }
                 ResponseCode.REGISTER_OK -> {
                     Toast.makeText(context, R.string.register_complete, Toast.LENGTH_SHORT).show()
-                    loginViewModel.setRegisterCompleted()
+                    loginViewModel.requestLoginPage()
                 }
                 else -> {
                     Toast.makeText(context, getText(R.string.unknown_error), Toast.LENGTH_LONG)

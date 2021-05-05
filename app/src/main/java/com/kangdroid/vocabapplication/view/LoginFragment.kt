@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.kangdroid.vocabapplication.R
 import com.kangdroid.vocabapplication.databinding.FragmentLoginBinding
@@ -25,10 +26,31 @@ class LoginFragment @Inject constructor(): Fragment() {
         return fragmentLoginBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Init Text Layout
+        initTextLayout()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
 
         // Make sure de-reference value since Memory leak might occurs.
         _fragmentLoginBinding = null
+    }
+
+    private fun initTextLayout() {
+        fragmentLoginBinding.userNameInputLayout.editText?.addTextChangedListener {
+            it?.let {
+                checkUserName(it.toString())
+            }
+        }
+    }
+
+    private fun checkUserName(userName: String) {
+        if (userName.isEmpty()) {
+            fragmentLoginBinding.userNameInputLayout.error = getString(R.string.required_field)
+        }
     }
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.kangdroid.vocabapplication.R
 import com.kangdroid.vocabapplication.data.response.ResponseCode
@@ -28,7 +29,7 @@ class RegisterFragment @Inject constructor(): Fragment() {
     private var readyUserPasswordValidation: Boolean = false
 
     // Login View Model
-    private val loginViewModel: LoginViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

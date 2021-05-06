@@ -1,6 +1,7 @@
 package com.kangdroid.vocabapplication.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,8 @@ class HomeFragment @Inject constructor() : Fragment() {
 
         // Init Observer
         initObserver()
+
+        homeViewModel.setRandomWordList()
     }
 
     override fun onDestroyView() {
@@ -60,6 +63,7 @@ class HomeFragment @Inject constructor() : Fragment() {
 
     private fun initObserver() {
         homeViewModel.randomWordList.observe(viewLifecycleOwner) {
+            Log.d(this::class.java.simpleName, "Observed Random Word List!")
             homeRecyclerAdapter.setRandomWordData(it)
         }
     }

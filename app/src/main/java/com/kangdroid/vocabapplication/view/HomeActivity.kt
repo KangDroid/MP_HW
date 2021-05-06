@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.kangdroid.vocabapplication.R
 import com.kangdroid.vocabapplication.databinding.ActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeActivity: AppCompatActivity() {
@@ -15,6 +16,10 @@ class HomeActivity: AppCompatActivity() {
     private val activityHomeBinding: ActivityHomeBinding by lazy {
         ActivityHomeBinding.inflate(layoutInflater)
     }
+
+    // Home Fragment
+    @Inject
+    lateinit var homeFragment: HomeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +32,11 @@ class HomeActivity: AppCompatActivity() {
     private fun setupBottomNavigationView() {
         activityHomeBinding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.homePage -> {true}
+                R.id.homePage -> {
+                    Log.d(logTag, "Initiating HomeFragment")
+                    commitFragment(homeFragment)
+                    true
+                }
                 R.id.searchPage -> true
                 R.id.learnPage -> {true}
                 R.id.profilePage -> {true}

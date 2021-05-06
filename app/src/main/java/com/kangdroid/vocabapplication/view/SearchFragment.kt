@@ -44,16 +44,11 @@ class SearchFragment @Inject constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Recycler
-        fragmentSearchBinding.searchResultRecycler.layoutManager =
-            LinearLayoutManager(activity?.applicationContext, LinearLayoutManager.VERTICAL, false)
-        fragmentSearchBinding.searchResultRecycler.adapter = wordSearchResultAdapter
+        // Initiate RecyclerView
+        initRecyclerView()
 
-        searchViewModel.searchResult.observe(viewLifecycleOwner) { it ->
-            Log.d(logTag, "Observed word!")
-            Log.d(logTag, "Word Size: ${it.size}")
-            wordSearchResultAdapter.setRandomWordData(it.toMutableList())
-        }
+        // Init Observer
+        initObserver()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -68,5 +63,20 @@ class SearchFragment @Inject constructor() : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _fragmentSearchBinding = null
+    }
+
+    private fun initRecyclerView() {
+        // Recycler
+        fragmentSearchBinding.searchResultRecycler.layoutManager =
+            LinearLayoutManager(activity?.applicationContext, LinearLayoutManager.VERTICAL, false)
+        fragmentSearchBinding.searchResultRecycler.adapter = wordSearchResultAdapter
+    }
+
+    private fun initObserver() {
+        searchViewModel.searchResult.observe(viewLifecycleOwner) { it ->
+            Log.d(logTag, "Observed word!")
+            Log.d(logTag, "Word Size: ${it.size}")
+            wordSearchResultAdapter.setRandomWordData(it.toMutableList())
+        }
     }
 }

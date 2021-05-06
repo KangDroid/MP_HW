@@ -16,4 +16,10 @@ class WordRepository @Inject constructor(
         Log.d(logTag, "Getting whole word list..")
         return wordDao.getAllWordList()
     }
+
+    suspend fun searchWordList(searchQuery: String): List<Word> {
+        Log.d(logTag, "Searching word with: $searchQuery")
+        val newQueryString: String = "%${searchQuery}%"
+        return wordDao.searchWordList(newQueryString)
+    }
 }

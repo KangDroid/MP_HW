@@ -9,4 +9,7 @@ import javax.inject.Singleton
 interface WordDao {
     @Query("SELECT * FROM word")
     suspend fun getAllWordList(): List<Word>
+
+    @Query("SELECT * FROM word WHERE word LIKE :searchQuery OR meaning LIKE :searchQuery")
+    suspend fun searchWordList(searchQuery: String): List<Word>
 }

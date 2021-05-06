@@ -27,6 +27,9 @@ class HomeActivity: AppCompatActivity() {
 
         // Setup bottomNavigationView
         setupBottomNavigationView()
+
+        // Setup initial page
+        commitFragment(homeFragment)
     }
 
     private fun setupBottomNavigationView() {

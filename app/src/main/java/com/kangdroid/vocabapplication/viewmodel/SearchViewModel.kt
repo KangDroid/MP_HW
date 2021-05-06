@@ -16,8 +16,13 @@ class SearchViewModel @Inject constructor(
     private val wordRepository: WordRepository
 ): ViewModel() {
 
+    // Search Mode
+    private var isSearchModeLocal: Boolean = true
+
     // Livedata communicating with searchFragment
     var searchResult: MutableLiveData<List<Word>> = MutableLiveData()
+
+    var searchUrl: MutableLiveData<String> = MutableLiveData()
 
     // Search TextViewListener
     val searchViewTextListener: SearchView.OnQueryTextListener = object: SearchView.OnQueryTextListener {
@@ -35,9 +40,21 @@ class SearchViewModel @Inject constructor(
     }
 
     fun searchWord(searchQuery: String) {
-        viewModelScope.launch {
-            searchResult.value = wordRepository.searchWordList(searchQuery)
+        if (isSearchModeLocal) {
+            viewModelScope.launch {
+                searchResult.value = wordRepository.searchWordList(searchQuery)
+            }
+        } else {
+            searchUrl.value = "https://en.dict.naver.com/#/search?range=all&query=${searchQuery}"
         }
+    }
+
+    fun setSearchModeLocal() {
+        isSearchModeLocal = true
+    }
+
+    fun setSearchModeInternet() {
+        isSearchModeLocal = false
     }
 
 }

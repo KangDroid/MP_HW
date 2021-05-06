@@ -5,6 +5,9 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.webkit.WebChromeClient
+import android.webkit.WebSettings
+import android.webkit.WebViewClient
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -49,6 +52,9 @@ class SearchFragment @Inject constructor() : Fragment() {
 
         // Init Observer
         initObserver()
+
+        // Init WebView
+        initWebView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -73,10 +79,34 @@ class SearchFragment @Inject constructor() : Fragment() {
     }
 
     private fun initObserver() {
+        // When Local mode
         searchViewModel.searchResult.observe(viewLifecycleOwner) { it ->
             Log.d(logTag, "Observed word!")
             Log.d(logTag, "Word Size: ${it.size}")
             wordSearchResultAdapter.setRandomWordData(it.toMutableList())
+        }
+
+        // When Internet mode
+        searchViewModel.searchUrl.observe(viewLifecycleOwner) {
+            Log.d(logTag, "Internet Mode!")
+            Log.d(logTag, "Dict URL: $it")
+            fragmentSearchBinding.searchWebView.loadUrl("https://dictionary.cambridge.org/ko/사전/영어-한국어/exam?q=${it}")
+        }
+    }
+
+    private fun initWebView() {
+        fragmentSearchBinding.searchWebView.webChromeClient = WebChromeClient()
+        fragmentSearchBinding.searchWebView.webViewClient = WebViewClient()
+        fragmentSearchBinding.searchWebView.settings.apply {
+            setSupportZoom(false)
+            setSupportMultipleWindows(false)
+            javaScriptEnabled = true
+            javaScriptCanOpenWindowsAutomatically = false
+            loadWithOverviewMode = true
+            useWideViewPort = true
+            builtInZoomControls = false
+            layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
+            domStorageEnabled = true
         }
     }
 }

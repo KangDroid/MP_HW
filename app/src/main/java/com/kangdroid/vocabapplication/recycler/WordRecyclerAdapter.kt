@@ -9,8 +9,7 @@ import com.kangdroid.vocabapplication.databinding.HomeRowBinding
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
-class HomeRecyclerAdapter @Inject constructor(): RecyclerView.Adapter<HomeRecyclerAdapter.HomeRecyclerViewHolder>() {
+class WordRecyclerAdapter: RecyclerView.Adapter<WordRecyclerAdapter.HomeRecyclerViewHolder>() {
 
     // Word Data
     private var randomWordData: MutableList<Word> = mutableListOf()

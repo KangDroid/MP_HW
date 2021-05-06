@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kangdroid.vocabapplication.databinding.FragmentHomeBinding
-import com.kangdroid.vocabapplication.recycler.HomeRecyclerAdapter
+import com.kangdroid.vocabapplication.recycler.WordRecyclerAdapter
 import com.kangdroid.vocabapplication.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -21,8 +21,7 @@ class HomeFragment @Inject constructor() : Fragment() {
     private val fragmentHomeBinding: FragmentHomeBinding get() = _fragmentHomeBinding!!
 
     // Home Recycler
-    @Inject
-    lateinit var homeRecyclerAdapter: HomeRecyclerAdapter
+    private val wordRecyclerAdapter: WordRecyclerAdapter = WordRecyclerAdapter()
 
     // Home View Model
     private val homeViewModel: HomeViewModel by viewModels()
@@ -58,14 +57,14 @@ class HomeFragment @Inject constructor() : Fragment() {
     private fun initRecyclerView() {
         fragmentHomeBinding.homeRecyclerView.layoutManager =
             LinearLayoutManager(activity?.applicationContext, LinearLayoutManager.VERTICAL, false)
-        fragmentHomeBinding.homeRecyclerView.adapter = homeRecyclerAdapter
+        fragmentHomeBinding.homeRecyclerView.adapter = wordRecyclerAdapter
     }
 
     private fun initObserver() {
         homeViewModel.randomWordList.observe(viewLifecycleOwner) {
             Log.d(this::class.java.simpleName, "Observed Random Word List!")
             Log.d(this::class.java.simpleName, "List size: ${it.size}")
-            homeRecyclerAdapter.setRandomWordData(it)
+            wordRecyclerAdapter.setRandomWordData(it)
         }
     }
 }

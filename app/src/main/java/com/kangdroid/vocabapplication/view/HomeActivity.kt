@@ -21,6 +21,10 @@ class HomeActivity: AppCompatActivity() {
     @Inject
     lateinit var homeFragment: HomeFragment
 
+    // Search Fragment
+    @Inject
+    lateinit var searchFragment: SearchFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activityHomeBinding.root)
@@ -40,8 +44,14 @@ class HomeActivity: AppCompatActivity() {
                     commitFragment(homeFragment)
                     true
                 }
-                R.id.searchPage -> true
-                R.id.learnPage -> {true}
+                R.id.searchPage -> {
+                    Log.d(logTag, "Initiating SearchFragment")
+                    commitFragment(searchFragment)
+                    true
+                }
+                R.id.learnPage -> {
+                    true
+                }
                 R.id.profilePage -> {true}
                 else -> {
                     Log.w(logTag, "Unknown Navigation ID: ${it.itemId}")

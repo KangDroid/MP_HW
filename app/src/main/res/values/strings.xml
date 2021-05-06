@@ -33,4 +33,7 @@
     <string name="default_word_view">The WORD</string>
     <string name="default_meaning_view">The meaning blahblahblah</string>
     <string name="default_show_meaning_view">Show meaning</string>
+
+    <!-- Search -->
+    <string name="search_view">Search</string>
 </resources>

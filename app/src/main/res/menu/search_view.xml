@@ -4,6 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.HomeActivity" >
+
+    <item
+        android:id="@+id/useInternetDictionary"
+        android:title="@string/use_internet_dictionary" />
+
     <item
         android:id="@+id/searchView"
         android:icon="@android:drawable/ic_menu_search"

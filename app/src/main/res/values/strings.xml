@@ -36,4 +36,6 @@
 
     <!-- Search -->
     <string name="search_view">Search</string>
+    <string name="use_internet_dictionary">Use local dictionary</string>
+    <string name="use_local_dictionary">Use local dictionary</string>
 </resources>

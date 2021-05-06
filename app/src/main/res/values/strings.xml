@@ -28,4 +28,9 @@
     <string name="search_page">Search</string>
     <string name="learn_page">Learn</string>
     <string name="profile_page">Profile</string>
+
+    <!-- home row -->
+    <string name="default_word_view">The WORD</string>
+    <string name="default_meaning_view">The meaning blahblahblah</string>
+    <string name="default_show_meaning_view">Show meaning</string>
 </resources>

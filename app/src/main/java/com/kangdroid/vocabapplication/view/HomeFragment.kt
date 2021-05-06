@@ -64,6 +64,7 @@ class HomeFragment @Inject constructor() : Fragment() {
     private fun initObserver() {
         homeViewModel.randomWordList.observe(viewLifecycleOwner) {
             Log.d(this::class.java.simpleName, "Observed Random Word List!")
+            Log.d(this::class.java.simpleName, "List size: ${it.size}")
             homeRecyclerAdapter.setRandomWordData(it)
         }
     }

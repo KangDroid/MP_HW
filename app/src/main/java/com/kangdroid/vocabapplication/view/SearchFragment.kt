@@ -8,8 +8,10 @@ import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kangdroid.vocabapplication.R
 import com.kangdroid.vocabapplication.databinding.FragmentSearchBinding
+import com.kangdroid.vocabapplication.recycler.WordRecyclerAdapter
 import com.kangdroid.vocabapplication.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -26,6 +28,9 @@ class SearchFragment @Inject constructor() : Fragment() {
     // Search View Model
     private val searchViewModel: SearchViewModel by viewModels()
 
+    // Word Search Result Adapter
+    private val wordSearchResultAdapter: WordRecyclerAdapter = WordRecyclerAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,9 +43,16 @@ class SearchFragment @Inject constructor() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Recycler
+        fragmentSearchBinding.searchResultRecycler.layoutManager =
+            LinearLayoutManager(activity?.applicationContext, LinearLayoutManager.VERTICAL, false)
+        fragmentSearchBinding.searchResultRecycler.adapter = wordSearchResultAdapter
+
         searchViewModel.searchResult.observe(viewLifecycleOwner) { it ->
             Log.d(logTag, "Observed word!")
             Log.d(logTag, "Word Size: ${it.size}")
+            wordSearchResultAdapter.setRandomWordData(it.toMutableList())
         }
     }
 

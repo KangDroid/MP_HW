@@ -44,6 +44,9 @@ class HomeFragment @Inject constructor() : Fragment() {
         // Init Observer
         initObserver()
 
+        // Init Refresher
+        initRefresher()
+
         homeViewModel.setRandomWordList()
     }
 
@@ -65,6 +68,14 @@ class HomeFragment @Inject constructor() : Fragment() {
             Log.d(this::class.java.simpleName, "Observed Random Word List!")
             Log.d(this::class.java.simpleName, "List size: ${it.size}")
             wordRecyclerAdapter.setRandomWordData(it)
+        }
+    }
+
+    private fun initRefresher() {
+        fragmentHomeBinding.swipeRefresh.setOnRefreshListener {
+            Log.d(this::class.java.simpleName, "Refresh Requested")
+            homeViewModel.setRandomWordList()
+            fragmentHomeBinding.swipeRefresh.isRefreshing = false
         }
     }
 }

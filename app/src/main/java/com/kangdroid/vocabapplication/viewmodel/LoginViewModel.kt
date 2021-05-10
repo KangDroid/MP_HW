@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kangdroid.vocabapplication.data.entity.user.User
+import com.kangdroid.vocabapplication.data.entity.user.UserDto
+import com.kangdroid.vocabapplication.data.entity.word.WordCategory
 import com.kangdroid.vocabapplication.data.repository.UserRepository
 import com.kangdroid.vocabapplication.data.response.ResponseCode
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -50,7 +52,7 @@ class LoginViewModel @Inject constructor(
                 Log.d(logTag, "No duplicate username found.")
 
                 // Add User
-                userRepository.addUser(User(null, userName, userPassword))
+                userRepository.addUser(UserDto(null, userName, userPassword, setOf()))
 
                 // Register Completed!
                 registerResponseLiveData.value = ResponseCode.REGISTER_OK
@@ -74,7 +76,7 @@ class LoginViewModel @Inject constructor(
     }
 
     // Procedure/steps to execute when ID is correct.
-    private fun whenIDCorrect(user: User, userName: String, userPassword: String) {
+    private fun whenIDCorrect(user: UserDto, userName: String, userPassword: String) {
         val isCredentialCorrect: Boolean = (user.userPassword == userPassword && user.userName == userName)
 
         // When credentials are not correct.

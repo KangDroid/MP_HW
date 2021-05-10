@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kangdroid.vocabapplication.data.entity.user.User
 import com.kangdroid.vocabapplication.data.entity.user.UserDto
+import com.kangdroid.vocabapplication.data.entity.user.UserSession
 import com.kangdroid.vocabapplication.data.entity.word.WordCategory
 import com.kangdroid.vocabapplication.data.repository.UserRepository
 import com.kangdroid.vocabapplication.data.response.ResponseCode
@@ -83,6 +84,7 @@ class LoginViewModel @Inject constructor(
         if (!isCredentialCorrect) {
             loginSucceed.value = ResponseCode.LOGIN_PASSWORD_INCORRECT
         } else {
+            UserSession.currentUser = user
             loginSucceed.value = ResponseCode.LOGIN_OK
             registerNeeded.value = ResponseCode.REQUIRED_HOME
             Log.d(logTag, "Login Succeed!")

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.kangdroid.vocabapplication.R
+import com.kangdroid.vocabapplication.data.entity.word.WordCategory
 import com.kangdroid.vocabapplication.data.response.ResponseCode
 import com.kangdroid.vocabapplication.databinding.FragmentRegisterBinding
 import com.kangdroid.vocabapplication.viewmodel.LoginViewModel
@@ -31,6 +32,9 @@ class RegisterFragment @Inject constructor(): Fragment() {
     // Login View Model
     private val loginViewModel: LoginViewModel by activityViewModels()
 
+    // Category List
+    private val weakWordCategory: MutableSet<WordCategory> = mutableSetOf()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,6 +52,9 @@ class RegisterFragment @Inject constructor(): Fragment() {
 
         // Init Register Button
         initRegisterButton()
+
+        // Init checkbox
+        initCheckBoxList()
 
         // Observer Init
         registerObserverViewModel()
@@ -89,7 +96,7 @@ class RegisterFragment @Inject constructor(): Fragment() {
                 val userName: String = fragmentRegisterBinding.registerInputName.editText?.text.toString()
                 val userPassword: String = fragmentRegisterBinding.registerPasswordLayout.editText?.text.toString()
                 Log.d(this::class.java.simpleName, "UserName: $userName")
-                loginViewModel.registerUser(userName, userPassword)
+                loginViewModel.registerUser(userName, userPassword, weakWordCategory)
             }
         }
     }
@@ -156,6 +163,39 @@ class RegisterFragment @Inject constructor(): Fragment() {
                 fragmentRegisterBinding.registerPasswordCheck.error = null
                 readyUserPasswordValidation = true
             }
+        }
+    }
+
+    private fun initCheckBoxList() {
+        val shuffledList: List<WordCategory> = enumValues<WordCategory>().toList().shuffled().take(3)
+        val checkedListener: (Boolean, Int) -> Unit = { isChecked, listNumber ->
+            if (isChecked) {
+                Log.d(this::class.java.simpleName, "Added: ${shuffledList[listNumber]}")
+                weakWordCategory.add(shuffledList[listNumber])
+            } else {
+                Log.d(this::class.java.simpleName, "Removed: ${shuffledList[listNumber]}")
+                weakWordCategory.removeIf {
+                    it == shuffledList[listNumber]
+                }
+            }
+        }
+
+        // First one
+        fragmentRegisterBinding.firstCheckBox.text = shuffledList[0].name
+        fragmentRegisterBinding.firstCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            checkedListener(isChecked, 0)
+        }
+
+        // Second one
+        fragmentRegisterBinding.secondCheckBox.text = shuffledList[1].name
+        fragmentRegisterBinding.secondCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            checkedListener(isChecked, 1)
+        }
+
+        // Third one
+        fragmentRegisterBinding.thirdCheckBox.text = shuffledList[2].name
+        fragmentRegisterBinding.thirdCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            checkedListener(isChecked, 2)
         }
     }
 }

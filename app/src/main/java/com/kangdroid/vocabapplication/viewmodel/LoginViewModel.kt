@@ -41,7 +41,7 @@ class LoginViewModel @Inject constructor(
     }
 
     // Register Value
-    fun registerUser(userName: String, userPassword: String) {
+    fun registerUser(userName: String, userPassword: String, weakCategory: Set<WordCategory>) {
         viewModelScope.launch {
             runCatching {
                 userRepository.findUserByName(userName)
@@ -52,7 +52,7 @@ class LoginViewModel @Inject constructor(
                 Log.d(logTag, "No duplicate username found.")
 
                 // Add User
-                userRepository.addUser(UserDto(null, userName, userPassword, setOf()))
+                userRepository.addUser(UserDto(null, userName, userPassword, weakCategory))
 
                 // Register Completed!
                 registerResponseLiveData.value = ResponseCode.REGISTER_OK

@@ -74,6 +74,33 @@
                 android:hint="@string/hint_password_check" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/familiarHintText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/familiar_category" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <CheckBox
+                android:id="@+id/firstCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_checkbox" />
+            <CheckBox
+                android:id="@+id/secondCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_checkbox" />
+            <CheckBox
+                android:id="@+id/thirdCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_checkbox" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <Button

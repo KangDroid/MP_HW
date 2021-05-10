@@ -22,6 +22,8 @@
     <string name="unknown_error">Unknown Error Occurred. Contact developer for more details.</string>
     <string name="register_complete">Register Completed!</string>
     <string name="id_password_mismatch">Username or Password is incorrect!</string>
+    <string name="familiar_category">Select category you are not familiar with.</string>
+    <string name="default_checkbox">Default Checkbox</string>
 
     <!-- Navigation View -->
     <string name="main_page">Home</string>

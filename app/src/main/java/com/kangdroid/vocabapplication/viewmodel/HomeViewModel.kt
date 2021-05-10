@@ -23,9 +23,8 @@ class HomeViewModel @Inject constructor(
     // Live data communicating with LoginFragment
     var randomWordList: MutableLiveData<MutableList<Word>> = MutableLiveData()
 
-    private val wordShowTotal: Int = 40
-    private val weakWordCount: Int = 24 // 60% of total
-    private val restWordCount: Int = wordShowTotal - weakWordCount // Rest
+    private val wordShowTotal: Int = 60
+    private val eachWeakPreserve: Int = 15
 
     fun setRandomWordList() {
         Log.d(logTag, "Shuffling word data..")
@@ -45,27 +44,24 @@ class HomeViewModel @Inject constructor(
             }
             val wordList: MutableList<Word> = mutableListOf()
 
-            // Add Priority Category
-            var categoryIterator: Int = 0
-            var toRemoveWord: Word
-            for (i in 0 until weakWordCount) {
-                wordList.add(
-                    totalWordList.find {
-                        it.category == weakCategoryList[categoryIterator].name.toLowerCase(Locale.ROOT)
-                    }!!.apply {toRemoveWord = this}
-                )
-                // Remove word
-                totalWordList.removeIf {
-                    it.id == toRemoveWord.id || it.word == toRemoveWord.word
+            weakCategoryList.forEach {
+                val categoryWordSize: List<Word> = totalWordList.filter { eachWord ->
+                    eachWord.category == it.name.toLowerCase()
                 }
 
-                categoryIterator++
-                categoryIterator %= weakCategoryList.size
+                if (categoryWordSize.size <= eachWeakPreserve) {
+                    totalWordList.removeAll(categoryWordSize)
+                    wordList.addAll(categoryWordSize)
+                } else {
+                    val selectedList: List<Word> = categoryWordSize.shuffled().take(eachWeakPreserve)
+                    totalWordList.removeAll(selectedList)
+                    wordList.addAll(selectedList)
+                }
             }
 
-            // Rest of word List
-            wordList.addAll(totalWordList.shuffled().take(restWordCount))
-            Log.d(logTag, "Put Priority Word: ${wordList.size}")
+            wordList.addAll(totalWordList.shuffled().take(wordShowTotal - wordList.size))
+
+            Log.d(logTag, "Added WordList: ${wordList.size}")
 
             randomWordList.value = wordList
         }

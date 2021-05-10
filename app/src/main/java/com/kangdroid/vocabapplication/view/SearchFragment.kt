@@ -49,6 +49,9 @@ class SearchFragment @Inject constructor() : Fragment() {
 
         // Init Observer
         initObserver()
+
+        // Initiate word list to view
+        searchViewModel.initiateAllWord()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

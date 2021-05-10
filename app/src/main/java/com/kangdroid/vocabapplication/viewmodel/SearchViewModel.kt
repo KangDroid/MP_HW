@@ -40,4 +40,10 @@ class SearchViewModel @Inject constructor(
         }
     }
 
+    fun initiateAllWord() {
+        viewModelScope.launch {
+            searchResult.value = wordRepository.getAllWord()
+        }
+    }
+
 }

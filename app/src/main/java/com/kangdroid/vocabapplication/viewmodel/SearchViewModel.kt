@@ -30,6 +30,10 @@ class SearchViewModel @Inject constructor(
         }
 
         override fun onQueryTextChange(newText: String?): Boolean {
+            Log.d("SearchView", "Text Changed: $newText")
+            newText?.let {
+                searchWord(it)
+            }
             return true
         }
     }

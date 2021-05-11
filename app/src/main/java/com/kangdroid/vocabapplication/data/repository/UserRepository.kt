@@ -50,4 +50,9 @@ class UserRepository @Inject constructor(
             weakCategory = objectMapper.readValue(userObject.weakCategory)
         )
     }
+
+    suspend fun deleteUser(userDto: UserDto) {
+        Log.d(logTag, "Removing user with username: ${userDto.userName}")
+        userDao.deleteUser(userDto.toUser())
+    }
 }

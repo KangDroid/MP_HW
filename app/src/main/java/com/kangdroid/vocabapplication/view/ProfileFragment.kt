@@ -1,6 +1,7 @@
 package com.kangdroid.vocabapplication.view
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -48,6 +49,10 @@ class ProfileFragment @Inject constructor() : Fragment() {
         profileViewModel.isRemoveSucceed.observe(viewLifecycleOwner) {
             if (it) {
                 Log.d(this::class.java.simpleName, "Remove data succeed!")
+                val intent: Intent = Intent(requireContext(), LoginActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                startActivity(intent)
             } else {
                 Log.e(this::class.java.simpleName, "Removing data failed. Please refer to logcat for more details.")
             }

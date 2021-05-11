@@ -38,4 +38,8 @@
 
     <!-- Search -->
     <string name="search_view">Search</string>
+
+    <!-- Profile -->
+    <string name="edit_credentials">Change Password</string>
+    <string name="remove_account">Remove Account</string>
 </resources>

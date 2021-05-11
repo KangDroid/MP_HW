@@ -68,6 +68,8 @@ class EditPasswordDialog(
                 )
                     .show()
             }
+
+            dismiss()
         }
 
         dialogEditPasswordBinding.currentPasswordInput.editText?.addTextChangedListener {
@@ -80,6 +82,7 @@ class EditPasswordDialog(
                 }
                 else -> {
                     dialogEditPasswordBinding.currentPasswordInput.error = null
+                    dialogEditPasswordBinding.currentPasswordInput.isErrorEnabled = false
                     isCurrentCorrect = true
                 }
             }
@@ -100,6 +103,7 @@ class EditPasswordDialog(
                 }
                 else -> {
                     dialogEditPasswordBinding.newPasswordInput.error = null
+                    dialogEditPasswordBinding.newPasswordInput.isErrorEnabled = false
                     isPasswordValidation = true
                 }
             }
@@ -118,6 +122,7 @@ class EditPasswordDialog(
                 }
                 else -> {
                     dialogEditPasswordBinding.inputNewPasswordCheckInput.error = null
+                    dialogEditPasswordBinding.inputNewPasswordCheckInput.isErrorEnabled = false
                     isPasswordCheckValidation = true
                 }
             }

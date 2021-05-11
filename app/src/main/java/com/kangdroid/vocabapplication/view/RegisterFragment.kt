@@ -129,6 +129,8 @@ class RegisterFragment @Inject constructor(): Fragment() {
             fragmentRegisterBinding.registerInputName.error = getString(R.string.required_field)
             readyUserName = false
         } else {
+            fragmentRegisterBinding.registerInputName.error = null
+            fragmentRegisterBinding.registerInputName.isErrorEnabled = false
             readyUserName = true
         }
     }
@@ -145,6 +147,7 @@ class RegisterFragment @Inject constructor(): Fragment() {
             }
             else -> {
                 fragmentRegisterBinding.registerPasswordLayout.error = null
+                fragmentRegisterBinding.registerPasswordLayout.isErrorEnabled = false
                 readyUserPassword = true
             }
         }
@@ -160,7 +163,7 @@ class RegisterFragment @Inject constructor(): Fragment() {
                 readyUserPasswordValidation = false
             }
             else -> {
-                fragmentRegisterBinding.registerPasswordCheck.error = null
+                fragmentRegisterBinding.registerPasswordCheck.isErrorEnabled = false
                 readyUserPasswordValidation = true
             }
         }

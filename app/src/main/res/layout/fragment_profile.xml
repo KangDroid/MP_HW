@@ -6,9 +6,11 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/credentialLayout"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
         android:orientation="horizontal">
 
         <ImageView
@@ -29,9 +31,11 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/removeAccountLayout"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
         android:orientation="horizontal">
 
         <ImageView

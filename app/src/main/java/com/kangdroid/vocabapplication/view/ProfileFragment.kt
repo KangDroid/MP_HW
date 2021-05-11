@@ -22,4 +22,9 @@ class ProfileFragment @Inject constructor() : Fragment() {
         _fragmentProfileBinding = FragmentProfileBinding.inflate(inflater, container, false)
         return fragmentRegisterBinding.root
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _fragmentProfileBinding = null
+    }
 }

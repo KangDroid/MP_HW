@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    val userRepository: UserRepository
 ) : ViewModel() {
     val isRemoveSucceed: MutableLiveData<Boolean> = MutableLiveData()
 

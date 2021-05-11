@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.kangdroid.vocabapplication.databinding.FragmentProfileBinding
@@ -34,6 +35,14 @@ class ProfileFragment @Inject constructor() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fragmentRegisterBinding.removeAccountLayout.setOnClickListener {
             showConfirmDialog()
+        }
+
+        fragmentRegisterBinding.credentialLayout.setOnClickListener {
+            val editDialog: EditPasswordDialog = EditPasswordDialog(requireContext(), profileViewModel.userRepository).apply {
+                setCanceledOnTouchOutside(true)
+                setCancelable(true)
+            }
+            editDialog.show()
         }
 
         // Init observer

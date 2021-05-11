@@ -55,4 +55,9 @@ class UserRepository @Inject constructor(
         Log.d(logTag, "Removing user with username: ${userDto.userName}")
         userDao.deleteUser(userDto.toUser())
     }
+
+    suspend fun updateUser(userDto: UserDto) {
+        Log.d(logTag, "Changing user with username: ${userDto.userName}")
+        userDao.updateUser(userDto.toUser())
+    }
 }

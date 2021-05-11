@@ -42,4 +42,9 @@
     <!-- Profile -->
     <string name="edit_credentials">Change Password</string>
     <string name="remove_account">Remove Account</string>
+    <string name="hint_password_current">Current Password</string>
+    <string name="input_new_password">New Password</string>
+    <string name="input_new_password_check">Enter new password again</string>
+    <string name="button_ok">Confirm</string>
+    <string name="button_cancel">Cancel</string>
 </resources>

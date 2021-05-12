@@ -29,6 +29,10 @@ class HomeActivity: AppCompatActivity() {
     @Inject
     lateinit var profileFragment: ProfileFragment
 
+    // Learn Fragment
+    @Inject
+    lateinit var learnFragment: LearnFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activityHomeBinding.root)
@@ -54,6 +58,8 @@ class HomeActivity: AppCompatActivity() {
                     true
                 }
                 R.id.learnPage -> {
+                    Log.d(logTag, "Initiating LearnFragment")
+                    commitFragment(learnFragment)
                     true
                 }
                 R.id.profilePage -> {

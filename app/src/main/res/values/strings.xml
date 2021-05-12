@@ -47,4 +47,9 @@
     <string name="input_new_password_check">Enter new password again</string>
     <string name="button_ok">Confirm</string>
     <string name="button_cancel">Cancel</string>
+
+    <!-- Learn -->
+    <string name="question_title_default">Default Question Title</string>
+    <string name="question_details_default">Default Question Details</string>
+    <string name="go">Go!</string>
 </resources>

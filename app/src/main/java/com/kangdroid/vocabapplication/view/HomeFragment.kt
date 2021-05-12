@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kangdroid.vocabapplication.databinding.FragmentHomeBinding
@@ -24,7 +25,7 @@ class HomeFragment @Inject constructor() : Fragment() {
     private val wordRecyclerAdapter: WordRecyclerAdapter = WordRecyclerAdapter()
 
     // Home View Model
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -46,8 +46,6 @@ class MCQViewModel @Inject constructor(
                     }
                 }
 
-                if (actualAnswer == -1) throw IllegalArgumentException("Actual Answer is -1?")
-
                 questionList.add(
                     MCQData(
                         questionNumber = questionList.size+1,
@@ -80,8 +78,6 @@ class MCQViewModel @Inject constructor(
                         break
                     }
                 }
-
-                if (actualAnswer == -1) throw IllegalArgumentException("Actual Answer is -1?")
 
                 questionList.add(
                     MCQData(

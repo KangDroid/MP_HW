@@ -52,4 +52,8 @@
     <string name="question_title_default">Default Question Title</string>
     <string name="question_details_default">Default Question Details</string>
     <string name="go">Go!</string>
+
+    <!-- MCQ -->
+    <string name="question_title">%d. What is the meaning of %s?</string>
+    <string name="default_choice">choice</string>
 </resources>

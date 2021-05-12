@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/multipleChoiceTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/question_title"
+        android:textSize="20sp"/>
+
+    <RadioGroup
+        android:id="@+id/mcqGroup"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/firstChoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/default_choice" />
+
+        <RadioButton
+            android:id="@+id/secondChoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/default_choice" />
+
+        <RadioButton
+            android:id="@+id/thirdChoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/default_choice" />
+
+        <RadioButton
+            android:id="@+id/fourthChoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/default_choice" />
+
+    </RadioGroup>
+</LinearLayout>

@@ -7,7 +7,7 @@ import com.kangdroid.vocabapplication.data.entity.question.LearnList
 import com.kangdroid.vocabapplication.data.entity.question.QuestionIdentifier
 import com.kangdroid.vocabapplication.databinding.LearnRowBinding
 
-class LearnRecyclerAdapter: RecyclerView.Adapter<LearnRecyclerAdapter.LearnRecyclerViewHolder>() {
+class LearnRecyclerAdapter(private val onClickListener: (QuestionIdentifier) -> Unit): RecyclerView.Adapter<LearnRecyclerAdapter.LearnRecyclerViewHolder>() {
     private val questionTypeList: List<LearnList> = listOf(
         LearnList(
             questionTitle = "Word - MCQ",
@@ -19,6 +19,9 @@ class LearnRecyclerAdapter: RecyclerView.Adapter<LearnRecyclerAdapter.LearnRecyc
         fun bind(learnList: LearnList) {
             learnRowBinding.questionTitle.text = learnList.questionTitle
             learnRowBinding.questionDetails.text = learnList.questionDetails
+            learnRowBinding.learnCardView.setOnClickListener {
+                onClickListener(learnList.questionIdentifier)
+            }
         }
     }
 

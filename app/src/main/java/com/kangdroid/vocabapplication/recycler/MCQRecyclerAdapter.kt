@@ -6,23 +6,23 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.kangdroid.vocabapplication.R
-import com.kangdroid.vocabapplication.data.entity.question.MCQData
+import com.kangdroid.vocabapplication.data.entity.question.QuestionData
 import com.kangdroid.vocabapplication.databinding.McqRowBinding
 
 class MCQRecyclerAdapter: RecyclerView.Adapter<MCQRecyclerAdapter.MCQRecyclerViewHolder>() {
-    private var mcqData: List<MCQData> = listOf()
+    private var mcqData: List<QuestionData> = listOf()
 
     inner class MCQRecyclerViewHolder(private val mcqRowBinding: McqRowBinding): RecyclerView.ViewHolder(mcqRowBinding.root) {
-        fun bind(questionData: MCQData) {
+        fun bind(questionData: QuestionData) {
             mcqRowBinding.mcqGroup.clearCheck()
             mcqRowBinding.multipleChoiceTitle.text = mcqRowBinding.multipleChoiceTitle.context.getString(R.string.question_title, questionData.questionNumber, questionData.targetWord.word)
             val choiceList: List<RadioButton> = listOf(mcqRowBinding.firstChoice, mcqRowBinding.secondChoice, mcqRowBinding.thirdChoice, mcqRowBinding.fourthChoice)
             for (i in choiceList.indices) {
-                choiceList[i].text = questionData.choiceList[i]
-                choiceList[i].isChecked = (questionData.chosenAnswer == i)
+                choiceList[i].text = questionData.choiceList!![i]
+                choiceList[i].isChecked = (questionData.chosenAnswerMCQ == i)
                 choiceList[i].setOnClickListener {
                     Log.d(this::class.java.simpleName, "SetOnClick Called!")
-                    questionData.chosenAnswer = i
+                    questionData.chosenAnswerMCQ = i
                 }
             }
         }
@@ -40,10 +40,10 @@ class MCQRecyclerAdapter: RecyclerView.Adapter<MCQRecyclerAdapter.MCQRecyclerVie
 
     override fun getItemCount(): Int = mcqData.size
 
-    fun setQuestionData(inputData: List<MCQData>) {
+    fun setQuestionData(inputData: List<QuestionData>) {
         mcqData = inputData
         notifyDataSetChanged()
     }
 
-    fun getSolvedQuestionData(): List<MCQData> = mcqData
+    fun getSolvedQuestionData(): List<QuestionData> = mcqData
 }

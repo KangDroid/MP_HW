@@ -61,6 +61,10 @@ class QuestionViewModel @Inject constructor(
         )
 
         user.weakCategory = getNewWeakCategory(questionList)
+        questionResult.value = Pair(correctCount, totalQuestionCount)
+        viewModelScope.launch {
+            userRepository.updateUser(user)
+        }
     }
 
     private fun getNewWeakCategory(questionList: List<QuestionData>): Set<WordCategory> {

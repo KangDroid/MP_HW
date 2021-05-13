@@ -63,6 +63,7 @@ class MCQFragment @Inject constructor(): Fragment() {
             R.id.submitMcq -> {
                 Log.d(this::class.java.simpleName, "Submit requested!")
                 questionViewModel.markQuestions(mcqRecyclerAdapter.getSolvedQuestionData())
+                learnViewModel.requestLearnPage()
             }
         }
         return super.onOptionsItemSelected(item)

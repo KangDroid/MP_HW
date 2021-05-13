@@ -1,9 +1,11 @@
 package com.kangdroid.vocabapplication.view
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -35,6 +37,13 @@ class MCQFragment @Inject constructor(): Fragment() {
         _fragmentMcq = FragmentMcqBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
         return fragmentMcqBinding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        requireActivity().onBackPressedDispatcher.addCallback {
+            learnViewModel.requestLearnPage()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

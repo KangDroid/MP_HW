@@ -42,7 +42,7 @@ class MCQViewModel @Inject constructor(
 
         user.questionLog.add(
             QuestionLog(
-                questionList = questionList,
+                totalCount = totalQuestionCount,
                 correctCount = correctCount
             )
         )

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kangdroid.vocabapplication.data.entity.question.MCQData
 import com.kangdroid.vocabapplication.data.entity.question.OEData
+import com.kangdroid.vocabapplication.data.entity.user.QuestionLog
 import com.kangdroid.vocabapplication.data.entity.user.UserDto
 import com.kangdroid.vocabapplication.data.entity.user.UserSession
 import com.kangdroid.vocabapplication.data.entity.word.Word
@@ -59,6 +60,13 @@ class OEViewModel @Inject constructor(
 
         val correctCount: Int = questionList.filter {it.allowedAnswer.contains(it.chosenAnswer)}.size
         Log.d(this::class.java.simpleName, "Correct: $correctCount out of $totalQuestionCount")
+
+        user.questionLog.add(
+            QuestionLog(
+                totalCount = totalQuestionCount,
+                correctCount = correctCount
+            )
+        )
 
         val newWeakCategoryPair: MutableList<Pair<WordCategory, Float>> = mutableListOf()
         questionList[0].categoryList.forEach { eachCategory ->

@@ -44,4 +44,6 @@ class MCQRecyclerAdapter: RecyclerView.Adapter<MCQRecyclerAdapter.MCQRecyclerVie
         mcqData = inputData
         notifyDataSetChanged()
     }
+
+    fun getSolvedQuestionData(): List<MCQData> = mcqData
 }

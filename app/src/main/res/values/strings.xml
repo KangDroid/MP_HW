@@ -56,4 +56,6 @@
     <!-- MCQ -->
     <string name="question_title">%d. What is the meaning of %s?</string>
     <string name="default_choice">choice</string>
+    <string name="submit_questions">Submit paper!</string>
+    <string name="mcq_result">Your result is: %d out of %d</string>
 </resources>

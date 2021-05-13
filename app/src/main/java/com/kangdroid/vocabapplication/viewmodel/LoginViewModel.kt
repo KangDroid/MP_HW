@@ -53,7 +53,7 @@ class LoginViewModel @Inject constructor(
                 Log.d(logTag, "No duplicate username found.")
 
                 // Add User
-                userRepository.addUser(UserDto(null, userName, userPassword, weakCategory))
+                userRepository.addUser(UserDto(null, userName, userPassword, weakCategory, mutableListOf()))
 
                 // Register Completed!
                 registerResponseLiveData.value = ResponseCode.REGISTER_OK

@@ -29,7 +29,8 @@ class UserRepository @Inject constructor(
                 id = it.id,
                 userName = it.userName,
                 userPassword = it.userPassword,
-                weakCategory = objectMapper.readValue(it.weakCategory)
+                weakCategory = objectMapper.readValue(it.weakCategory),
+                questionLog = objectMapper.readValue(it.questionLog)
             )
         }.toList()
     }
@@ -47,7 +48,8 @@ class UserRepository @Inject constructor(
             id = userObject.id,
             userName = userObject.userName,
             userPassword = userObject.userPassword,
-            weakCategory = objectMapper.readValue(userObject.weakCategory)
+            weakCategory = objectMapper.readValue(userObject.weakCategory),
+            questionLog = objectMapper.readValue(userObject.questionLog)
         )
     }
 

@@ -10,6 +10,7 @@ class User(
     @ColumnInfo(name = "username") var userName: String,
     @ColumnInfo(name = "password") var userPassword: String,
     @ColumnInfo(name = "weakcategory") var weakCategory: String, // Should be serialized in json
+    @ColumnInfo(name = "questionlog") var questionLog: String // Should be serialized in json
 ) {
     override fun toString(): String {
         return "User Name: $userName"

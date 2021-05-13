@@ -9,6 +9,7 @@ class UserDto(
     var userName: String,
     var userPassword: String,
     var weakCategory: Set<WordCategory>, // Should be serialized in json
+    var questionLog: MutableList<QuestionLog>
 ) {
     private val objectMapper: ObjectMapper = jacksonObjectMapper()
 
@@ -20,6 +21,7 @@ class UserDto(
         id = id,
         userName = userName,
         userPassword = userPassword,
-        weakCategory = objectMapper.writeValueAsString(weakCategory)
+        weakCategory = objectMapper.writeValueAsString(weakCategory),
+        questionLog = objectMapper.writeValueAsString(questionLog)
     )
 }

@@ -24,6 +24,7 @@ class LearnFragment @Inject constructor(): Fragment() {
     private val learnRecyclerAdapter: LearnRecyclerAdapter = LearnRecyclerAdapter() {
         when (it) {
             QuestionIdentifier.QUESTION_MCQ -> learnViewModel.requestMCQ()
+            QuestionIdentifier.QUESTION_OE -> learnViewModel.requestOE()
             else -> {}
         }
     }

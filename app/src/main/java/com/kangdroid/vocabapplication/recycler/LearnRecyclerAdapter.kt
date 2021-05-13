@@ -13,6 +13,11 @@ class LearnRecyclerAdapter(private val onClickListener: (QuestionIdentifier) -> 
             questionTitle = "Word - MCQ",
             questionDetails = "Multiple Choice Question!",
             questionIdentifier = QuestionIdentifier.QUESTION_MCQ
+        ),
+        LearnList(
+            questionTitle = "Word - OE",
+            questionDetails = "Open Ended Question!",
+            questionIdentifier = QuestionIdentifier.QUESTION_OE
         )
     )
     inner class LearnRecyclerViewHolder(private val learnRowBinding: LearnRowBinding): RecyclerView.ViewHolder(learnRowBinding.root) {

@@ -58,4 +58,7 @@
     <string name="default_choice">choice</string>
     <string name="submit_questions">Submit paper!</string>
     <string name="mcq_result">Your result is: %d out of %d</string>
+
+    <!-- OE -->
+    <string name="input_meaning">Input meaning</string>
 </resources>

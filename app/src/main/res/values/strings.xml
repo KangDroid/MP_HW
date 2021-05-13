@@ -66,4 +66,7 @@
 
     <!-- OE -->
     <string name="input_meaning">Input meaning</string>
+
+    <!-- Listening -->
+    <string name="listen_title">%d. Listen and check correct words: </string>
 </resources>

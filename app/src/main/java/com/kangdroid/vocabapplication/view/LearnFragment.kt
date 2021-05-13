@@ -25,6 +25,7 @@ class LearnFragment @Inject constructor(): Fragment() {
         when (it) {
             QuestionIdentifier.QUESTION_MCQ -> learnViewModel.requestMCQ()
             QuestionIdentifier.QUESTION_OE -> learnViewModel.requestOE()
+            QuestionIdentifier.QUESTION_LISTENING -> learnViewModel.requestListenMCQ()
             else -> {}
         }
     }

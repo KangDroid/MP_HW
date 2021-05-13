@@ -17,5 +17,8 @@ data class QuestionData(
 
     // OE
     var allowedAnswer: Set<String>? = null,
-    var chosenAnswerOE: String? = null
+    var chosenAnswerOE: String? = null,
+
+    // Listen Choice
+    var listenChoice: ListenChoice? = null
 )

@@ -44,6 +44,10 @@ class HomeActivity: AppCompatActivity() {
     @Inject
     lateinit var oeFragment: OEFragment
 
+    // listenMCQ Fragment
+    @Inject
+    lateinit var listenFragment: ListenFragment
+
     // Learn View Model
     private val learnViewModel: LearnViewModel by viewModels()
 
@@ -106,6 +110,7 @@ class HomeActivity: AppCompatActivity() {
                 LearnPageRequest.REQUEST_LEARN_MAIN -> commitFragment(learnFragment)
                 LearnPageRequest.REQUEST_MCQ -> commitFragment(mcqFragment)
                 LearnPageRequest.REQUEST_OE -> commitFragment(oeFragment)
+                LearnPageRequest.REQUEST_LISTEN_MCQ -> commitFragment(listenFragment)
                 else -> {}
             }
         }

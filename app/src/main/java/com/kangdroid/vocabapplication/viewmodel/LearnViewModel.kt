@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 enum class LearnPageRequest {
-    REQUEST_LEARN_MAIN, REQUEST_MCQ, REQUEST_OE
+    REQUEST_LEARN_MAIN, REQUEST_MCQ, REQUEST_OE, REQUEST_LISTEN_MCQ
 }
 
 @HiltViewModel
@@ -23,5 +23,9 @@ class LearnViewModel @Inject constructor(): ViewModel() {
 
     fun requestOE() {
         pageRequest.value = LearnPageRequest.REQUEST_OE
+    }
+
+    fun requestListenMCQ()  {
+        pageRequest.value = LearnPageRequest.REQUEST_LISTEN_MCQ
     }
 }

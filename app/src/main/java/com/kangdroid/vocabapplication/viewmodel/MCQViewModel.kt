@@ -47,6 +47,25 @@ class MCQViewModel @Inject constructor(
             )
         )
 
+        val newWeakCategoryPair: MutableList<Pair<WordCategory, Float>> = mutableListOf()
+        questionList[0].categoryList.forEach { eachCategory ->
+            val categoryWordList: List<MCQData> = questionList.filter {it.targetWord.category.toLowerCase() == eachCategory.name.toLowerCase()}
+            val correctWordList: List<MCQData> = categoryWordList.filter {it.actualAnswer == it.chosenAnswer}
+            val score: Float = (correctWordList.size.toFloat() / categoryWordList.size) * 100
+            newWeakCategoryPair.add(Pair(eachCategory, score))
+
+            Log.d(this::class.java.simpleName, "Category: ${eachCategory.name}, Q Size: ${categoryWordList.size}, Correct: ${correctWordList.size}, Score: $score")
+        }
+
+        // Sort them
+        val newWeakCategory: List<WordCategory> = newWeakCategoryPair.sortedWith(compareBy {it.second}).map {
+            Log.d(this::class.java.simpleName, "New Category: ${it.first.name}")
+            it.first
+        }.take(3)
+
+        // Convert to Set
+        user.weakCategory = newWeakCategory.toSet()
+
         viewModelScope.launch {
             userRepository.updateUser(user)
             questionResult.value = Pair<Int, Int>(correctCount, totalQuestionCount)
@@ -75,7 +94,7 @@ class MCQViewModel @Inject constructor(
 
             Log.d(this::class.java.simpleName, "Category - weak: ${user.weakCategory.size}, Category - Rest: $categoryToChoose, Total Q: ${questionList.size}")
 
-            questionData.value = questionList.shuffled()
+            questionData.value = questionList
         }
     }
 
@@ -97,6 +116,7 @@ class MCQViewModel @Inject constructor(
 
                 questionList.add(
                     MCQData(
+                        categoryList = categoryList,
                         questionNumber = questionList.size+1,
                         targetWord = eachWord,
                         actualAnswer = actualAnswer,

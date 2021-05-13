@@ -9,6 +9,7 @@ import com.kangdroid.vocabapplication.data.entity.user.QuestionLog
 import com.kangdroid.vocabapplication.data.entity.user.UserDto
 import com.kangdroid.vocabapplication.data.entity.user.UserSession
 import com.kangdroid.vocabapplication.data.entity.word.Word
+import com.kangdroid.vocabapplication.data.entity.word.WordCategory
 import com.kangdroid.vocabapplication.data.repository.UserRepository
 import com.kangdroid.vocabapplication.data.repository.WordRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -64,45 +65,26 @@ class MCQViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            // Total Word List
-            val totalWordList: MutableList<Word> = wordRepository.getAllWord().toMutableList()
-            val questionList: MutableList<MCQData> = weakCategoryToQuestion(user, totalWordList)
-
-            // Add questions
-            val targetWordList: List<Word> = totalWordList.shuffled().take(totalQuestionCount - questionList.size).onEach {
-
-                var actualAnswer: Int = -1
-                val choice: List<String> = prepareMeaning(it)
-                for (i in choice.indices) {
-                    if (choice[i] == it.meaning) {
-                        actualAnswer = i
-                        break
-                    }
-                }
-
-                questionList.add(
-                    MCQData(
-                        questionNumber = questionList.size+1,
-                        targetWord = it,
-                        actualAnswer = actualAnswer,
-                        choiceList = choice
-                    )
+            val categoryToChoose: Int = 5 - user.weakCategory.size
+            val categoryList: MutableList<WordCategory> = user.weakCategory.toMutableList().apply {
+                addAll(
+                    enumValues<WordCategory>().filter { !user.weakCategory.contains(it) }.shuffled().take(categoryToChoose)
                 )
             }
+            val questionList: MutableList<MCQData> = categoryToQuestion(categoryList)
 
-            questionData.value = questionList
+            Log.d(this::class.java.simpleName, "Category - weak: ${user.weakCategory.size}, Category - Rest: $categoryToChoose, Total Q: ${questionList.size}")
+
+            questionData.value = questionList.shuffled()
         }
     }
 
-    private suspend fun weakCategoryToQuestion(user: UserDto, totalWordList: MutableList<Word>): MutableList<MCQData> {
+    private suspend fun categoryToQuestion(categoryList: List<WordCategory>): MutableList<MCQData> {
         // Question List
         val questionList: MutableList<MCQData> = mutableListOf()
 
-        user.weakCategory.forEach {
+        categoryList.forEach {
             val wordList: List<Word> = wordRepository.findByCategory(it).shuffled().take(weakWordCount).onEach { eachWord ->
-                totalWordList.removeIf { target ->
-                    eachWord.id == target.id
-                }
 
                 var actualAnswer: Int = -1
                 val choice: List<String> = prepareMeaning(eachWord)

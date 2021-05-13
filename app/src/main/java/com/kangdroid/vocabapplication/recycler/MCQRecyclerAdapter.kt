@@ -15,7 +15,7 @@ class MCQRecyclerAdapter: RecyclerView.Adapter<MCQRecyclerAdapter.MCQRecyclerVie
     inner class MCQRecyclerViewHolder(private val mcqRowBinding: McqRowBinding): RecyclerView.ViewHolder(mcqRowBinding.root) {
         fun bind(questionData: MCQData) {
             mcqRowBinding.mcqGroup.clearCheck()
-            mcqRowBinding.multipleChoiceTitle.text = mcqRowBinding.multipleChoiceTitle.context.getString(R.string.question_title, questionData.questionNumber, questionData.targetWord)
+            mcqRowBinding.multipleChoiceTitle.text = mcqRowBinding.multipleChoiceTitle.context.getString(R.string.question_title, questionData.questionNumber, questionData.targetWord.word)
             val choiceList: List<RadioButton> = listOf(mcqRowBinding.firstChoice, mcqRowBinding.secondChoice, mcqRowBinding.thirdChoice, mcqRowBinding.fourthChoice)
             for (i in choiceList.indices) {
                 choiceList[i].text = questionData.choiceList[i]

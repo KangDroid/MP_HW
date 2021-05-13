@@ -83,7 +83,7 @@ class MCQViewModel @Inject constructor(
                 questionList.add(
                     MCQData(
                         questionNumber = questionList.size+1,
-                        targetWord = it.word,
+                        targetWord = it,
                         actualAnswer = actualAnswer,
                         choiceList = choice
                     )
@@ -116,7 +116,7 @@ class MCQViewModel @Inject constructor(
                 questionList.add(
                     MCQData(
                         questionNumber = questionList.size+1,
-                        targetWord = eachWord.word,
+                        targetWord = eachWord,
                         actualAnswer = actualAnswer,
                         choiceList = choice
                     )

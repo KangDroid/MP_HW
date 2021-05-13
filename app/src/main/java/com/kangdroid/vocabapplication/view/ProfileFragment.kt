@@ -10,7 +10,10 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.kangdroid.vocabapplication.data.entity.user.UserSession
 import com.kangdroid.vocabapplication.databinding.FragmentProfileBinding
+import com.kangdroid.vocabapplication.recycler.QuestionLogRecyclerAdapter
 import com.kangdroid.vocabapplication.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -19,6 +22,10 @@ import javax.inject.Inject
 class ProfileFragment @Inject constructor() : Fragment() {
     private var _fragmentProfileBinding: FragmentProfileBinding? = null
     private val fragmentRegisterBinding: FragmentProfileBinding get() = _fragmentProfileBinding!!
+
+    private val questionLogRecyclerAdapter: QuestionLogRecyclerAdapter by lazy {
+        QuestionLogRecyclerAdapter(UserSession.currentUser!!.questionLog)
+    }
 
     private val profileViewModel: ProfileViewModel by viewModels()
 
@@ -47,6 +54,9 @@ class ProfileFragment @Inject constructor() : Fragment() {
 
         // Init observer
         initObserver()
+
+        // Init recycler
+        initRecyclerView()
     }
 
     override fun onDestroyView() {
@@ -66,6 +76,11 @@ class ProfileFragment @Inject constructor() : Fragment() {
                 Log.e(this::class.java.simpleName, "Removing data failed. Please refer to logcat for more details.")
             }
         }
+    }
+
+    private fun initRecyclerView() {
+        fragmentRegisterBinding.questionRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        fragmentRegisterBinding.questionRecyclerView.adapter = questionLogRecyclerAdapter
     }
 
     private fun showConfirmDialog() {

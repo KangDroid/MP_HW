@@ -47,6 +47,11 @@
     <string name="input_new_password_check">Enter new password again</string>
     <string name="button_ok">Confirm</string>
     <string name="button_cancel">Cancel</string>
+    <string name="category_credentials">Credentials</string>
+    <string name="category_questions">Question log</string>
+    <string name="question_score">Score: %d / %d</string>
+    <string name="question_held">Question held on: %s</string>
+    <string name="question_type">Type: %s</string>
 
     <!-- Learn -->
     <string name="question_title_default">Default Question Title</string>

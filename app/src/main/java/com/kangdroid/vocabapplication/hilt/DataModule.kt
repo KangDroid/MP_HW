@@ -20,6 +20,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DataModule {
+    @Singleton
     @Provides
     fun provideUserDatabase(@ApplicationContext context: Context): UserDatabase {
         return Room.databaseBuilder(
@@ -29,16 +30,19 @@ object DataModule {
         ).build()
     }
 
+    @Singleton
     @Provides
     fun provideUserDao(database: UserDatabase): UserDao {
         return database.getUserDao()
     }
 
+    @Singleton
     @Provides
     fun provideUserRepository(userDao: UserDao): UserRepository {
         return UserRepository(userDao)
     }
 
+    @Singleton
     @Provides
     fun provideWordDatabase(@ApplicationContext context: Context): WordDatabase {
         return Room.databaseBuilder(
@@ -49,11 +53,13 @@ object DataModule {
             .build()
     }
 
+    @Singleton
     @Provides
     fun provideWordDao(database: WordDatabase): WordDao {
         return database.getWordDao()
     }
 
+    @Singleton
     @Provides
     fun provideWordRepository(wordDao: WordDao): WordRepository {
         return WordRepository(wordDao)

@@ -108,14 +108,23 @@ class HomeActivity: AppCompatActivity() {
         }
     }
 
+    private fun commitFragmentWithAnimation(targetFragment: Fragment, replace: Boolean = false) {
+        supportFragmentManager.beginTransaction().apply {
+            setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+            if (replace) addToBackStack(null)
+            replace(R.id.eachPageView, targetFragment)
+            commit()
+        }
+    }
+
     private fun initObserver() {
         learnViewModel.pageRequest.observe(this) {
             when (it) {
-                LearnPageRequest.REQUEST_LEARN_MAIN -> commitFragment(learnFragment)
-                LearnPageRequest.REQUEST_MCQ -> commitFragment(mcqFragment)
-                LearnPageRequest.REQUEST_OE -> commitFragment(oeFragment)
-                LearnPageRequest.REQUEST_LISTEN_MCQ -> commitFragment(listenFragment)
-                LearnPageRequest.REQUEST_LISTEN_OE -> commitFragment(listenOEFragment)
+                LearnPageRequest.REQUEST_LEARN_MAIN -> commitFragmentWithAnimation(learnFragment)
+                LearnPageRequest.REQUEST_MCQ -> commitFragmentWithAnimation(mcqFragment)
+                LearnPageRequest.REQUEST_OE -> commitFragmentWithAnimation(oeFragment)
+                LearnPageRequest.REQUEST_LISTEN_MCQ -> commitFragmentWithAnimation(listenFragment)
+                LearnPageRequest.REQUEST_LISTEN_OE -> commitFragmentWithAnimation(listenOEFragment)
                 else -> {}
             }
         }

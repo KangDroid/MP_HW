@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kangdroid.vocabapplication.data.entity.question.ListenChoice
+import com.kangdroid.vocabapplication.data.entity.question.ListenOE
 import com.kangdroid.vocabapplication.data.entity.question.QuestionData
 import com.kangdroid.vocabapplication.data.entity.question.QuestionType
 import com.kangdroid.vocabapplication.data.entity.user.QuestionLog
@@ -94,6 +95,7 @@ class QuestionViewModel @Inject constructor(
             QuestionType.QUESTION_MCQ -> {it.actualAnswer == it.chosenAnswerMCQ}
             QuestionType.QUESTION_OE -> {it.allowedAnswer!!.contains(it.chosenAnswerOE ?: "")}
             QuestionType.QUESTION_LISTEN_CHOICE -> {it.listenChoice!!.actualAnswer == it.listenChoice!!.chosenAnswer}
+            QuestionType.QUESTION_LISTEN_OE -> {it.listenOEQuestion!!.actualAnswer == it.listenOEQuestion!!.inputAnswer}
         }
     }
 
@@ -117,6 +119,13 @@ class QuestionViewModel @Inject constructor(
                             ListenChoice(
                                 actualAnswer = findAnswerMCQ(eachWord, meaningList!!),
                                 choiceList = meaningList
+                            )
+                        } else {
+                            null
+                        },
+                        listenOEQuestion = if (questionType == QuestionType.QUESTION_LISTEN_OE) {
+                            ListenOE(
+                                actualAnswer = eachWord.word
                             )
                         } else {
                             null

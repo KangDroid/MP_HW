@@ -69,4 +69,6 @@
 
     <!-- Listening -->
     <string name="listen_title">%d. Listen and check correct words: </string>
+    <string name="listen_write_title">%d. Listen and spell the word: </string>
+    <string name="input_word">Input word: </string>
 </resources>

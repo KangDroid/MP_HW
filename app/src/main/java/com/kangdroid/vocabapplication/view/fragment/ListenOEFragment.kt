@@ -46,13 +46,6 @@ class ListenOEFragment @Inject constructor() : Fragment() {
         return fragmentListenBinding.root
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        requireActivity().onBackPressedDispatcher.addCallback {
-            learnViewModel.requestLearnPage()
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

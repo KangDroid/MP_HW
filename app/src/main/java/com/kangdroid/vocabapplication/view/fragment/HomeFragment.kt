@@ -1,4 +1,4 @@
-package com.kangdroid.vocabapplication.view
+package com.kangdroid.vocabapplication.view.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kangdroid.vocabapplication.databinding.FragmentHomeBinding
 import com.kangdroid.vocabapplication.recycler.WordRecyclerAdapter

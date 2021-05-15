@@ -1,4 +1,4 @@
-package com.kangdroid.vocabapplication.view
+package com.kangdroid.vocabapplication.view.fragment
 
 import android.content.Context
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.kangdroid.vocabapplication.view
+package com.kangdroid.vocabapplication.view.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.kangdroid.vocabapplication.R
 import com.kangdroid.vocabapplication.data.entity.word.WordCategory
 import com.kangdroid.vocabapplication.data.response.ResponseCode

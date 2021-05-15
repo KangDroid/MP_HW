@@ -1,4 +1,4 @@
-package com.kangdroid.vocabapplication.view
+package com.kangdroid.vocabapplication.view.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -13,15 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kangdroid.vocabapplication.R
 import com.kangdroid.vocabapplication.data.entity.question.QuestionType
 import com.kangdroid.vocabapplication.databinding.FragmentListenBinding
-import com.kangdroid.vocabapplication.databinding.FragmentMcqBinding
-import com.kangdroid.vocabapplication.recycler.ListenChoiceRecyclerAdapter
+import com.kangdroid.vocabapplication.recycler.ListenOERecyclerAdapter
 import com.kangdroid.vocabapplication.viewmodel.LearnViewModel
 import com.kangdroid.vocabapplication.viewmodel.QuestionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ListenFragment @Inject constructor(): Fragment() {
+class ListenOEFragment @Inject constructor() : Fragment() {
     private var _fragmentListen: FragmentListenBinding? = null
     private val fragmentListenBinding: FragmentListenBinding get() = _fragmentListen!!
 
@@ -31,8 +30,8 @@ class ListenFragment @Inject constructor(): Fragment() {
     @Inject
     lateinit var textToSpeech: TextToSpeech
 
-    private val listenChoiceRecyclerAdapter: ListenChoiceRecyclerAdapter by lazy {
-        ListenChoiceRecyclerAdapter {
+    private val listenChoiceRecyclerAdapter: ListenOERecyclerAdapter by lazy {
+        ListenOERecyclerAdapter {
             textToSpeech.speak(it.targetWord.word, TextToSpeech.QUEUE_FLUSH, null, null)
         }
     }
@@ -59,7 +58,7 @@ class ListenFragment @Inject constructor(): Fragment() {
 
         initRecyclerView()
         initObserver()
-        questionViewModel.createQuestion(QuestionType.QUESTION_LISTEN_CHOICE)
+        questionViewModel.createQuestion(QuestionType.QUESTION_LISTEN_OE)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -71,7 +70,7 @@ class ListenFragment @Inject constructor(): Fragment() {
         when (item.itemId) {
             R.id.submitMcq -> {
                 Log.d(this::class.java.simpleName, "Submit requested!")
-                questionViewModel.markQuestions(listenChoiceRecyclerAdapter.listenChoiceData)
+                questionViewModel.markQuestions(listenChoiceRecyclerAdapter.listenQuestionData)
                 learnViewModel.requestLearnPage()
             }
         }
@@ -92,7 +91,7 @@ class ListenFragment @Inject constructor(): Fragment() {
     private fun initObserver() {
         questionViewModel.totalQuestionList.observe(viewLifecycleOwner) {
             if (it != null) {
-                listenChoiceRecyclerAdapter.listenChoiceData = it
+                listenChoiceRecyclerAdapter.listenQuestionData = it
             }
         }
 

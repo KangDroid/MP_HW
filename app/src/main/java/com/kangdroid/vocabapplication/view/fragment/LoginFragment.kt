@@ -1,4 +1,4 @@
-package com.kangdroid.vocabapplication.view
+package com.kangdroid.vocabapplication.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

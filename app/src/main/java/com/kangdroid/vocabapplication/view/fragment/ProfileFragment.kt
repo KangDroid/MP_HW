@@ -1,4 +1,4 @@
-package com.kangdroid.vocabapplication.view
+package com.kangdroid.vocabapplication.view.fragment
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -7,13 +7,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kangdroid.vocabapplication.data.entity.user.UserSession
 import com.kangdroid.vocabapplication.databinding.FragmentProfileBinding
 import com.kangdroid.vocabapplication.recycler.QuestionLogRecyclerAdapter
+import com.kangdroid.vocabapplication.view.EditPasswordDialog
+import com.kangdroid.vocabapplication.view.LoginActivity
 import com.kangdroid.vocabapplication.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

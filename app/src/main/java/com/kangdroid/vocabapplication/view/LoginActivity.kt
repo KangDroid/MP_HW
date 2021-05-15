@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import com.kangdroid.vocabapplication.R
 import com.kangdroid.vocabapplication.data.response.ResponseCode
 import com.kangdroid.vocabapplication.databinding.ActivityMainBinding
+import com.kangdroid.vocabapplication.view.fragment.LoginFragment
+import com.kangdroid.vocabapplication.view.fragment.RegisterFragment
 import com.kangdroid.vocabapplication.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

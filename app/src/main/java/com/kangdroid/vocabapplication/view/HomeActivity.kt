@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.kangdroid.vocabapplication.R
 import com.kangdroid.vocabapplication.databinding.ActivityHomeBinding
+import com.kangdroid.vocabapplication.view.fragment.*
 import com.kangdroid.vocabapplication.viewmodel.LearnPageRequest
 import com.kangdroid.vocabapplication.viewmodel.LearnViewModel
 import dagger.hilt.android.AndroidEntryPoint

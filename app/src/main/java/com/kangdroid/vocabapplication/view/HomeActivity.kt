@@ -70,6 +70,22 @@ class HomeActivity: AppCompatActivity() {
         commitFragment(homeFragment)
     }
 
+    override fun onBackPressed() {
+        val currentFragment: Fragment = supportFragmentManager.findFragmentById(R.id.eachPageView) ?: run {
+            Log.d(logTag, "Current activity do not have any fragment registered!")
+            super.onBackPressed()
+            return
+        }
+
+        when (currentFragment) {
+            is ListenFragment, is ListenOEFragment, is MCQFragment, is OEFragment -> {learnViewModel.requestLearnPage()}
+            else -> {
+                Log.d(logTag, "Non of fragment is Learn-Related Fragment.")
+                super.onBackPressed()
+            }
+        }
+    }
+
     private fun setupBottomNavigationView() {
         activityHomeBinding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {

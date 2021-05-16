@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kangdroid.vocabapplication.data.entity.question.ListenChoice
-import com.kangdroid.vocabapplication.data.entity.question.ListenOE
-import com.kangdroid.vocabapplication.data.entity.question.QuestionData
-import com.kangdroid.vocabapplication.data.entity.question.QuestionType
+import com.kangdroid.vocabapplication.data.entity.question.*
 import com.kangdroid.vocabapplication.data.entity.user.QuestionLog
 import com.kangdroid.vocabapplication.data.entity.user.UserDto
 import com.kangdroid.vocabapplication.data.entity.user.UserSession
@@ -92,8 +89,8 @@ class QuestionViewModel @Inject constructor(
 
     private fun getCorrectCount(questionList: List<QuestionData>): List<QuestionData> = questionList.filter {
         when (questionList[0].questionType) {
-            QuestionType.QUESTION_MCQ -> {it.actualAnswer == it.chosenAnswerMCQ}
-            QuestionType.QUESTION_OE -> {it.allowedAnswer!!.contains(it.chosenAnswerOE ?: "")}
+            QuestionType.QUESTION_MCQ -> {it.mcqQuestionData!!.actualAnswer == it.mcqQuestionData!!.chosenAnswerMCQ}
+            QuestionType.QUESTION_OE -> {it.oeQuestionData!!.allowedAnswer.contains(it.oeQuestionData!!.chosenAnswerOE ?: "")}
             QuestionType.QUESTION_LISTEN_CHOICE -> {it.listenChoice!!.actualAnswer == it.listenChoice!!.chosenAnswer}
             QuestionType.QUESTION_LISTEN_OE -> {it.listenOEQuestion!!.actualAnswer == it.listenOEQuestion!!.inputAnswer}
         }
@@ -112,9 +109,15 @@ class QuestionViewModel @Inject constructor(
                         categoryList = wordCategoryList,
                         targetWord = eachWord,
                         questionNumber = questionList.size+1,
-                        choiceList = if (questionType == QuestionType.QUESTION_MCQ) meaningList!! else null,
-                        actualAnswer = if (questionType == QuestionType.QUESTION_MCQ) findAnswerMCQ(eachWord, meaningList!!) else null,
-                        allowedAnswer = if (questionType == QuestionType.QUESTION_OE) getMeaningList(eachWord) else null,
+                        mcqQuestionData = if (questionType == QuestionType.QUESTION_MCQ) {
+                            MCQQuestion(
+                                actualAnswer = findAnswerMCQ(eachWord, meaningList!!),
+                                choiceList = meaningList,
+                            )
+                        } else null,
+                        oeQuestionData = if (questionType == QuestionType.QUESTION_OE) {
+                            OEQuestion(getMeaningList(eachWord))
+                        } else null,
                         listenChoice = if (questionType == QuestionType.QUESTION_LISTEN_CHOICE) {
                             ListenChoice(
                                 actualAnswer = findAnswerMCQ(eachWord, meaningList!!),

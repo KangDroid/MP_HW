@@ -18,11 +18,11 @@ class MCQRecyclerAdapter: RecyclerView.Adapter<MCQRecyclerAdapter.MCQRecyclerVie
             mcqRowBinding.multipleChoiceTitle.text = mcqRowBinding.multipleChoiceTitle.context.getString(R.string.question_title, questionData.questionNumber, questionData.targetWord.word)
             val choiceList: List<RadioButton> = listOf(mcqRowBinding.firstChoice, mcqRowBinding.secondChoice, mcqRowBinding.thirdChoice, mcqRowBinding.fourthChoice)
             for (i in choiceList.indices) {
-                choiceList[i].text = questionData.choiceList!![i]
-                choiceList[i].isChecked = (questionData.chosenAnswerMCQ == i)
+                choiceList[i].text = questionData.mcqQuestionData!!.choiceList[i]
+                choiceList[i].isChecked = (questionData.mcqQuestionData!!.chosenAnswerMCQ == i)
                 choiceList[i].setOnClickListener {
                     Log.d(this::class.java.simpleName, "SetOnClick Called!")
-                    questionData.chosenAnswerMCQ = i
+                    questionData.mcqQuestionData!!.chosenAnswerMCQ = i
                 }
             }
         }

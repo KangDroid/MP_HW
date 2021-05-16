@@ -14,12 +14,12 @@ class OERecyclerAdapter: RecyclerView.Adapter<OERecyclerAdapter.OERecyclerViewHo
     inner class OERecyclerViewHolder(private val oeRowBinding: OeRowBinding): RecyclerView.ViewHolder(oeRowBinding.root) {
         init {
             oeRowBinding.inputMeaning.addTextChangedListener {
-                questionList[adapterPosition].chosenAnswerOE = it?.toString()
+                questionList[adapterPosition].oeQuestionData!!.chosenAnswerOE = it?.toString()
             }
         }
         fun bind(oeData: QuestionData) {
             oeRowBinding.oeTitle.text = oeRowBinding.oeTitle.context.getString(R.string.question_title, oeData.questionNumber, oeData.targetWord.word)
-            oeRowBinding.inputMeaning.setText(oeData.chosenAnswerOE)
+            oeRowBinding.inputMeaning.setText(oeData.oeQuestionData!!.chosenAnswerOE)
         }
     }
 

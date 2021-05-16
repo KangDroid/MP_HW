@@ -11,13 +11,10 @@ data class QuestionData(
     var targetWord: Word,
 
     // MCQ
-    var actualAnswer: Int? = null,
-    var choiceList: List<String>? = null,
-    var chosenAnswerMCQ: Int? = null,
+    var mcqQuestionData: MCQQuestion? = null,
 
     // OE
-    var allowedAnswer: Set<String>? = null,
-    var chosenAnswerOE: String? = null,
+    var oeQuestionData: OEQuestion? = null,
 
     // Listen Choice
     var listenChoice: ListenChoice? = null,
